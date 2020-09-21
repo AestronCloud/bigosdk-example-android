@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">1v1 Video</string>
+    <string name="title_welcome_to_live">Welcome to bigo 1v1 voice</string>
+    <string name="tips_input_room_name">Please input channel id</string>
+</resources>

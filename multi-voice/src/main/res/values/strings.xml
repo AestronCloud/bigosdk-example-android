@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">six voice</string>
+    <string name="title_welcome_to_live">Welcome to multi voice room</string>
+    <string name="tips_input_room_name">Please input channel name</string>
+</resources>

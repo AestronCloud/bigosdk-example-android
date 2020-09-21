@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="sg.bigo.one2onevideo">
+
+    <application
+        android:name="sg.bigo.common.LiveApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/bigo_logo_small"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/bigo_logo_small"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="sg.bigo.common.One2OneLiveActivity"
+            android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            />
+        <activity
+            android:name="sg.bigo.common.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="sg.bigo.common.LiveNameInputActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name="sg.bigo.common.StickersActivity"
+            android:theme="@style/myTransparent"
+            />
+        <activity android:name="sg.bigo.common.BeautifyActivity"
+            android:theme="@style/myTransparent"
+            />
+
+        <activity
+            android:name="sg.bigo.common.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">六人房</string>
+    <string name="title_welcome_to_live">欢迎来到Bigo六人房</string>
+    <string name="tips_input_room_name">请输入频道名</string>
+</resources>

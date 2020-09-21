@@ -1,0 +1,61 @@
+apply plugin: 'maven'
+
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
+            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+}
+
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
+            : "https://oss.sonatype.org/content/repositories/snapshots/"
+}
+
+def getRepositoryUsername() {
+    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+}
+
+def getRepositoryPassword() {
+    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+}
+
+def getPomVersionName() {
+    return project.hasProperty("POM_VERSION_NAME") ? POM_VERSION_NAME : "1.0.0"
+}
+
+def getPomVersionCode() {
+    return project.hasProperty("POM_VERSION_CODE") ? POM_VERSION_CODE : "244"
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            print "getRepositoryUsername() ${getRepositoryUsername()}"
+            print "getRepositoryPassword() ${getRepositoryPassword()}"
+            repository(url: getReleaseRepositoryUrl()) {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }
+            snapshotRepository(url: getSnapshotRepositoryUrl()) {
+                authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+            }
+
+            pom.artifactId = project.POM_ARTIFACT_ID
+            pom.groupId = project.POM_GROUP
+
+
+            if (project.hasProperty("SNAPSHOT") && Boolean.valueOf(project.SNAPSHOT)) {
+                pom.version = getPomVersionName() + "." + getPomVersionCode() + "-SNAPSHOT" //构建服务器执行脚本把BUILD_NUMBER赋值到POM_VERSION_CODE
+            } else {
+                pom.version = getPomVersionName()
+            }
+
+            print "=====>>>>>> ${pom.version}"
+
+
+            project.logger.info("artifactId=" + pom.artifactId)
+            project.logger.info('version=' + pom.version)
+            project.logger.info("groupId=" + pom.groupId)
+
+        }
+    }
+}

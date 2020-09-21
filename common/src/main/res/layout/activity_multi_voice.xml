@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/channel_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="6dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/dark_black" />
+
+        <LinearLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/mute_icon"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:onClick="onVoiceMuteClicked"
+                android:layout_marginBottom="10dp"
+                android:src="@mipmap/btn_mute" />
+
+
+            <ImageView
+                android:id="@+id/bottom_action_end_call"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center_horizontal"
+                android:onClick="onEndCallClicked"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/btn_endcall"
+                android:layout_marginBottom="10dp"/>
+
+
+            <ImageView
+                android:id="@+id/bottom_speak_on"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center_horizontal"
+                android:onClick="onEndCallClicked"
+                android:src="@mipmap/btn_speaker"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/msg_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="start|top"
+            android:enabled="true"
+            android:focusable="false"
+            android:scrollbars="vertical"
+            android:inputType="none"
+            android:layout_above="@id/bottom_container"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="8dp"
+            android:layout_below="@id/channel_name" />
+
+    </RelativeLayout>
+</FrameLayout>

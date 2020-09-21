@@ -1,0 +1,259 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_background">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="25dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            >
+            <Button
+                android:id="@+id/go_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/gray"
+                android:text="设置"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/gray"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/bigo_logo_small" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:text="@string/title_welcome_to_live"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/etLiveName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/gray"
+            android:hint="@string/tips_input_room_name"
+            android:inputType="text" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/ll_entrance_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnSixVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_six_video_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnbasicbeauty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_basic_beauty_video_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnbasicbeauty1v1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_basic_beauty_1v1_video_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnMultiLive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn1v1Live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_1v1_live_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn1v1Voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_1v1_voice_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btnSixVoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_six_voice_go"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tips_powered_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:text="@string/tips_powered"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

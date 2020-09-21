@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/iv_sticker_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btn_audio_disabled"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/iv_sticker_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="自然"
+        />
+</LinearLayout>

@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name" translatable="false">Bigo OpenLive</string>
+    <string name="tips_powered" translatable="false">Powered by bigo.sg 1.0.0</string>
+    <string name="title_welcome_to_live">Welcome to Bigo Open Live</string>
+    <string name="tips_regist_user_account">Please input your account name</string>
+    <string name="tips_input_room_name">Please input the live\'s name</string>
+    <string name="tips_next">Next</string>
+    <string name="tips_go">Go</string>
+    <string name="tips_voice_go">Go voice live</string>
+    <string name="tips_1v1_live_go">Go 1v1</string>
+    <string name="tips_1v1_live_go2">Go 1v1 v2</string>
+    <string name="tips_1v1_voice_go">Go 1v1 voice</string>
+    <string name="tips_six_voice_go">Go six voice</string>
+    <string name="tips_six_video_go">Go six Live</string>
+    <string name="tips_basic_beauty_video_go">Go basic beauty Live</string>
+    <string name="tips_basic_beauty_1v1_video_go">Go basic beauty 1v1 video</string>
+    <string name="tips_choose_broadcast_or_audience">Would you like to be the broadcaster or an audience?</string>
+    <string name="tips_start_broadcast">broadcaster</string>
+    <string name="tips_watch_broadcast">audience</string>
+    <string name="tips_current_user">User:</string>
+
+    <string name="tips_enter_room_failed">Failed to join channel</string>
+    <string name="tips_enter_room_token_error">Token error</string>
+
+    <string name="tips_add_black_uid">Input the black uid want to add:</string>
+    <string name="tips_remove_black_uid">Input the black uid want to remove:</string>
+    <string name="tips_be_added_black_success"> Add to the black uid list success </string>
+    <string name="tips_be_added_black_failed"> Add to the black uid list failed </string>
+    <string name="tips_be_removed_black_success"> Remove from the black uid list success </string>
+    <string name="tips_be_removed_black_failed"> Remove from the black uid list failed </string>
+
+    <string name="tips_add_white_uid">Input the white uid want to add:</string>
+    <string name="tips_remove_white_uid">Input the white uid want to remove:</string>
+    <string name="tips_be_added_white_success"> Add to the white uid list success. </string>
+    <string name="tips_be_added_white_failed"> Add to the black uid list failed </string>
+    <string name="tips_be_removed_white_success"> Remove from the white uid list success </string>
+    <string name="tips_be_removed_white_failed"> Remove from the white uid list failed </string>
+
+    <string name="tips_kick_success"> kick success </string>
+    <string name="tips_kick_failed"> kick fail </string>
+    <string name="tips_be_kicked_suggest"> You have been kicked out of the room </string>
+
+    <string name="tips_input_uid">Input uid: </string>
+    <string name="tips_uid_format_invailded"> Invalided Uid </string>
+
+    <string name="tips_confirm">Confirm</string>
+    <string name="tips_cancel">Cancel</string>
+
+    <string name="tips_switch_public_room_success">switch public room successed </string>
+    <string name="tips_switch_public_room_failed">switch public room failed </string>
+
+    <string name="tips_switch_private_room_success">switch private room successed </string>
+    <string name="tips_switch_private_room_failed">switch private room failed </string>
+
+
+    <string name="setting_title">Settings</string>
+    <string name="setting_resolution_title">Resolution</string>
+    <string name="setting_frame_rate">Framerate</string>
+    <string name="setting_stats_title">Show video statistics</string>
+
+    <string name="setting_mirror_local_title">Local video preview mirror mode</string>
+    <string name="setting_mirror_remote_title">Remote video render mirror mode</string>
+    <string name="setting_mirror_encode_title">Local video encode mirror mode</string>
+    <string name="tips_for_white_list">white list</string>
+    <string name="tips_for_black_list">black list</string>
+
+
+    <string-array name="string_array_resolutions">
+        <item>320x240</item>
+        <item>480x360</item>
+        <item>640x360</item>
+        <item>640x480</item>
+        <item>960x540</item>
+        <item>1280x720</item>
+    </string-array>
+
+    <string-array name="string_array_fps">
+        <item>1fps</item>
+        <item>7fps</item>
+        <item>10fps</item>
+        <item>15fps</item>
+        <item>24fps</item>
+        <item>30fps</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,63 @@
+<resources>
+    <string name="title_welcome_to_live">欢迎来到Bigo直播</string>
+    <string name="tips_regist_user_account">请输入你的用户名</string>
+    <string name="tips_input_room_name">请输入直播间名称</string>
+    <string name="tips_next">下一步</string>
+    <string name="tips_go">进入直播</string>
+    <string name="tips_voice_go">进入声音直播</string>
+    <string name="tips_1v1_live_go">进入1v1视频</string>
+    <string name="tips_1v1_live_go2">进入1v1视频V2</string>
+    <string name="tips_1v1_voice_go">进入1v1音频</string>
+    <string name="tips_six_voice_go">进入多人语音</string>
+    <string name="tips_six_video_go">进入六人房</string>
+    <string name="tips_basic_beauty_video_go">进入基础美颜直播</string>
+    <string name="tips_basic_beauty_1v1_video_go">进入基础美颜1v1通话</string>
+    <string name="tips_choose_broadcast_or_audience">请选择开播还是观看？</string>
+    <string name="tips_start_broadcast">开播</string>
+    <string name="tips_watch_broadcast">观看</string>
+    <string name="tips_current_user">用户:</string>
+
+    <string name="tips_enter_room_failed">进入房间失败</string>
+    <string name="tips_enter_room_token_error">Token校验失败</string>
+
+    <string name="tips_add_black_uid">请输入要加入黑名单uid:</string>
+    <string name="tips_remove_black_uid">请输入要移除黑名单的uid:</string>
+    <string name="tips_be_added_black_success"> 已经被列入黑名单 </string>
+    <string name="tips_be_added_black_failed"> 列入黑名单失败 </string>
+    <string name="tips_be_removed_black_success"> 已经从黑名单中移除 </string>
+    <string name="tips_be_removed_black_failed"> 从黑名单中移除失败 </string>
+
+    <string name="tips_add_white_uid">请输入要加入白名单的uid:</string>
+    <string name="tips_remove_white_uid">请输入要移除白名单的uid:</string>
+    <string name="tips_be_added_white_success"> 已经被列入白名单 </string>
+    <string name="tips_be_added_white_failed"> 列入白名单失败 </string>
+    <string name="tips_be_removed_white_success"> 已经从白名单中移除 </string>
+    <string name="tips_be_removed_white_failed"> 从白名单中移除失败 </string>
+
+    <string name="tips_kick_success"> 踢出成功 </string>
+    <string name="tips_kick_failed"> 踢出失败 </string>
+    <string name="tips_be_kicked_suggest"> 你已经被踢出房间 </string>
+
+    <string name="tips_input_uid">请输入uid: </string>
+    <string name="tips_uid_format_invailded"> 无效的Uid </string>
+
+    <string name="tips_confirm">确定</string>
+    <string name="tips_cancel">取消</string>
+    <string name="tips_switch_public_room_success"> 切换公开房间成功 </string>
+    <string name="tips_switch_public_room_failed"> 切换公开房间失败 </string>
+    <string name="tips_switch_private_room_success"> 切换私密房间成功 </string>
+    <string name="tips_switch_private_room_failed"> 切换私密房间失败 </string>
+
+
+    <string name="setting_title">设置</string>
+    <string name="setting_resolution_title">分辨率</string>
+    <string name="setting_frame_rate">帧率</string>
+    <string name="setting_stats_title">显示视频统计数据</string>
+
+    <string name="setting_mirror_encode_title">本地视频编码镜像模式</string>
+    <string name="setting_mirror_local_title">本地视频预览镜像模式</string>
+    <string name="setting_mirror_remote_title">远端视频渲染镜像模式</string>
+    <string name="tips_for_white_list">白名单</string>
+    <string name="tips_for_black_list">黑名单</string>
+
+</resources>

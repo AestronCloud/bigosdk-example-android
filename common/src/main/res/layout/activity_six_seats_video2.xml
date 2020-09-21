@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+    <sg.bigo.opensdk.api.struct.BigoRendererView
+        android:id="@+id/bigoRendererView"
+        android:background="@android:color/white"
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+                <sg.bigo.opensdk.api.struct.RendererCanvas
+                    android:id="@+id/mic6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </sg.bigo.opensdk.api.struct.BigoRendererView>
+
+</FrameLayout>

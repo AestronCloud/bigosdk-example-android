@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/role_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_title_layout_height"
+            android:background="@color/blue">
+
+            <TextView
+                android:layout_width="@dimen/back_arrow_size"
+                android:layout_height="@dimen/back_arrow_size"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/back_arrow_left"
+                android:layout_marginLeft="@dimen/back_arrow_left"
+                android:layout_marginBottom="@dimen/setting_title_content_margin"
+                android:background="@mipmap/btn_back_arrow"
+                android:onClick="onBackArrowPressed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/setting_title_content_margin"
+                android:text="@string/setting_title"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_large" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/setting_resolution_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginTop="@dimen/setting_content_margin_vertical"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin"
+            android:layout_marginBottom="@dimen/setting_content_margin_vertical"
+            android:text="@string/setting_resolution_title"
+            android:textColor="@color/gray_deep_dark"
+            android:textSize="@dimen/text_size_normal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resolution_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin" />
+
+        <View
+            android:id="@+id/setting_content_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_divider_height"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginTop="@dimen/setting_content_margin_vertical"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin"
+            android:background="@color/gray_lightest" />
+
+        <TextView
+            android:id="@+id/setting_fps_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginTop="@dimen/setting_content_margin_vertical"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin"
+            android:layout_marginBottom="@dimen/setting_content_margin_vertical"
+            android:text="@string/setting_frame_rate"
+            android:textColor="@color/gray_deep_dark"
+            android:textSize="@dimen/text_size_normal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/framerate_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_divider_height"
+            android:layout_marginStart="@dimen/setting_content_margin"
+            android:layout_marginLeft="@dimen/setting_content_margin"
+            android:layout_marginTop="@dimen/setting_content_margin_vertical"
+            android:layout_marginEnd="@dimen/setting_content_margin"
+            android:layout_marginRight="@dimen/setting_content_margin"
+            android:background="@color/gray_lightest" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_item_height_normal">
+
+            <TextView
+                android:id="@+id/setting_stats_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin"
+                android:layout_marginLeft="@dimen/setting_content_margin"
+                android:text="@string/setting_stats_title"
+                android:textColor="@color/gray_deep_dark"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/setting_stats_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/setting_content_margin"
+                android:layout_marginRight="@dimen/setting_content_margin"
+                android:background="@drawable/setting_switch"
+                android:onClick="onStatsChecked" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_mirror_local_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_item_height_normal"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick">
+
+            <TextView
+                android:id="@+id/setting_mirror_local_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin"
+                android:layout_marginLeft="@dimen/setting_content_margin"
+                android:text="@string/setting_mirror_local_title"
+                android:textColor="@color/gray_deep_dark"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/setting_mirror_local_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/setting_content_margin"
+                android:layout_marginRight="@dimen/setting_content_margin" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_mirror_remote_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_item_height_normal"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick">
+
+            <TextView
+                android:id="@+id/setting_mirror_remote_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin"
+                android:layout_marginLeft="@dimen/setting_content_margin"
+                android:text="@string/setting_mirror_remote_title"
+                android:textColor="@color/gray_deep_dark"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/setting_mirror_remote_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/setting_content_margin"
+                android:layout_marginRight="@dimen/setting_content_margin" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_mirror_encode_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_item_height_normal"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick">
+
+            <TextView
+                android:id="@+id/setting_mirror_encode_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/setting_content_margin"
+                android:layout_marginLeft="@dimen/setting_content_margin"
+                android:text="@string/setting_mirror_encode_title"
+                android:textColor="@color/gray_deep_dark"
+                android:textSize="@dimen/text_size_normal" />
+
+            <TextView
+                android:id="@+id/setting_mirror_encode_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/setting_content_margin"
+                android:layout_marginRight="@dimen/setting_content_margin" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/seekprogress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/bitrateSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="8192"
+            android:progress="4096"
+            android:tooltipText="码率" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/audioprofileTypeRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="音频参数选择" />
+
+                    <RadioButton
+                        android:id="@+id/profile_DEFAULT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="默认" />
+
+                    <RadioButton
+                        android:id="@+id/SPEECH_STANDARD"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="标准语音" />
+
+                    <RadioButton
+                        android:id="@+id/MUSIC_STANDARD"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="标准音乐" />
+
+                    <RadioButton
+                        android:id="@+id/MUSIC_STANDARD_STEREO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="标准立体声音乐" />
+
+                    <RadioButton
+                        android:id="@+id/MUSIC_HIGH_QUALITY"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="高音质音乐" />
+
+                    <RadioButton
+                        android:id="@+id/MUSIC_HIGH_QUALITY_STEREO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="高音质立体声音乐" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="使用场景选择" />
+
+                <RadioGroup
+                    android:id="@+id/audioScenarioTypeRG"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:id="@+id/DEFAULT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="默认" />
+
+                    <RadioButton
+                        android:id="@+id/CHATROOM_ENTERTAINMENT"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="娱乐室" />
+
+                    <RadioButton
+                        android:id="@+id/EDUCATION"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="教育应用" />
+
+                    <RadioButton
+                        android:id="@+id/GAME_STREAMING"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="高音质语聊房应用" />
+
+                    <RadioButton
+                        android:id="@+id/SHOWROOM"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="秀场应用" />
+
+                    <RadioButton
+                        android:id="@+id/CHATROOM_GAMING"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="游戏开黑" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

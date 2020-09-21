@@ -1,0 +1,14 @@
+include ':basic-beauty-1v1-video'
+gradle.ext.DEBUG_TOB = false
+gradle.ext.MEDIA_SDK_DEBUG = false
+
+include ':common-beauty'
+include ':six-seat-video-live'
+include ':one-to-one-video'
+include ':multi-voice'
+include ':multi-live'
+include ':one-to-one-voice'
+include ':all'
+include ':one-to-one-video'
+include ':common'
+rootProject.name='opendemo'

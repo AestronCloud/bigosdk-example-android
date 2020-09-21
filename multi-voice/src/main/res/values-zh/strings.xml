@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">多人语音</string>
+    <string name="title_welcome_to_live">欢迎来到Bigo多人语音</string>
+    <string name="tips_input_room_name">请输入房间名称</string>
+</resources>

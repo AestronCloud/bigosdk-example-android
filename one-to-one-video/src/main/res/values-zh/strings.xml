@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">1v1 视频</string>
+    <string name="title_welcome_to_live">欢迎来到bigo 1v1视频</string>
+    <string name="tips_input_room_name">请输入频道id</string>
+</resources>

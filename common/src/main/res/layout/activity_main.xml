@@ -1,0 +1,81 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_background">
+
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@mipmap/bigo_logo_small" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/title_welcome_to_live"
+            android:textColor="@color/gray"
+            android:textSize="20sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textColorHint="@color/gray"
+            android:hint="@string/tips_regist_user_account"
+            android:inputType="text" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnGo"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/start_broadcast_height"
+            android:layout_marginTop="@dimen/start_broadcast_radius"
+            android:layout_gravity="center"
+            android:paddingLeft="@dimen/start_broadcast_padding"
+            android:paddingRight="@dimen/start_broadcast_padding"
+            android:paddingStart="@dimen/start_broadcast_padding"
+            android:paddingEnd="@dimen/start_broadcast_padding"
+            android:textAlignment="gravity"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/tips_next"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="@drawable/start_broadcast_bg"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="30dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:text="@string/tips_powered"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

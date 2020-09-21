@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">basic beauty 1v1 video</string>
+    <string name="title_welcome_to_live">Welcome to basic beauty 1v1 video</string>
+    <string name="tips_input_room_name">Please input channel id</string>
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">multi live</string>
+    <string name="title_welcome_to_live">Welcome to Bigo multi live</string>
+    <string name="tips_input_room_name">Please input the channel name</string>
+</resources>

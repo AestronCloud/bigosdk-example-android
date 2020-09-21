@@ -1,0 +1,61 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_compare"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/ic_compared_nor"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <SeekBar
+            android:id="@+id/seekprogress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:progress="50"
+            android:secondaryProgress="70"
+            android:max="100"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp"
+            android:background="@color/white"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingTop="10dp"
+        android:background="@color/white">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+</LinearLayout>
