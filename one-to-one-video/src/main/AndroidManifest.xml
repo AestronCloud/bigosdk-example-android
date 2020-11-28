@@ -14,7 +14,7 @@
             android:name="sg.bigo.common.One2OneLiveActivity"
             android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             />
         <activity
             android:name="sg.bigo.common.SettingsActivity"
@@ -28,6 +28,10 @@
             />
         <activity android:name="sg.bigo.common.BeautifyActivity"
             android:theme="@style/myTransparent"
+            />
+
+        <activity android:name="sg.bigo.common.DebugToolCfgActivity"
+            android:screenOrientation="portrait"
             />
 
         <activity

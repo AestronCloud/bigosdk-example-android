@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <PreferenceCategory
+        android:title="@string/tips_transcoding_cfg">
+
+        <EditTextPreference
+            android:key="transcoding_cfg_width"
+            android:title="Width"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Width"/>
+
+        <EditTextPreference
+            android:key="transcoding_cfg_height"
+            android:title="Height"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Height"/>
+
+        <EditTextPreference
+            android:key="transcoding_cfg_video_bitrate"
+            android:title="Video Bitrate"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Video Bitrate"/>
+
+        <EditTextPreference
+            android:key="transcoding_cfg_video_framerate"
+            android:title="Video Framerate"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Video Framerate"/>
+
+<!--        <SwitchPreference-->
+<!--            android:key="transcoding_cfg_low_latency"-->
+<!--            android:title="Low Latency"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:dialogTitle="Low Latency"/>-->
+
+        <EditTextPreference
+            android:key="transcoding_cfg_video_gop"
+            android:title="Video Gop"
+            app:useSimpleSummaryProvider="true"
+            android:dialogTitle="Video Gop"/>
+
+<!--        <ListPreference-->
+<!--            android:key="transcoding_cfg_video_codec_profile"-->
+<!--            android:title="Video Codec Profile"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:entries="@array/video_codec_profile"-->
+<!--            android:entryValues="@array/video_codec_profile"-->
+<!--            android:defaultValue="MAIN"-->
+<!--            android:dialogTitle="Video Codec Profile"/>-->
+
+        <Preference
+            android:key="transcoding_cfg_transcoding_users"
+            android:title="Transcoding Users"
+            />
+
+<!--        <EditTextPreference-->
+<!--            android:key="transcoding_cfg_extra_info"-->
+<!--            android:title="Extra Info"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:dialogTitle="Extra Info"/>-->
+
+<!--        <Preference-->
+<!--            android:key="transcoding_cfg_watermark"-->
+<!--            android:title="Watermark"-->
+<!--            />-->
+
+        <Preference
+            android:key="transcoding_cfg_background_img"
+            android:title="Background Image"
+            />
+
+<!--        <EditTextPreference-->
+<!--            android:key="transcoding_cfg_background_color"-->
+<!--            android:title="Background Color"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:dialogTitle="Background Color"/>-->
+
+<!--        <ListPreference-->
+<!--            android:key="transcoding_cfg_audio_sample_rate"-->
+<!--            android:title="Audio Sample Rate"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:entries="@array/audio_sample_rate"-->
+<!--            android:entryValues="@array/audio_sample_rate"-->
+<!--            android:defaultValue="TYPE_44100"-->
+<!--            android:dialogTitle="Audio Sample Rate"/>-->
+
+<!--        <EditTextPreference-->
+<!--            android:key="transcoding_cfg_audio_bitrate"-->
+<!--            android:title="Audio Bitrate"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:dialogTitle="Audio Bitrate"/>-->
+
+<!--        <EditTextPreference-->
+<!--            android:key="transcoding_cfg_audio_channel"-->
+<!--            android:title="Audio Channels"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:dialogTitle="Audio Channels"/>-->
+
+<!--        <ListPreference-->
+<!--            android:key="transcoding_cfg_audio_codec_profile"-->
+<!--            android:title="Audio Codec Profile"-->
+<!--            app:useSimpleSummaryProvider="true"-->
+<!--            android:entries="@array/audio_codec_profile"-->
+<!--            android:entryValues="@array/audio_codec_profile"-->
+<!--            android:defaultValue="LC_AAC"-->
+<!--            android:dialogTitle="Audio Codec Profile"/>-->
+    </PreferenceCategory>
+</PreferenceScreen>

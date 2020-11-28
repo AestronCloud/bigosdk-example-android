@@ -1,7 +1,7 @@
-# bigosdk-example-android
+#example-android
 
 ## 编译运行说明
-1. 在控制台https://console.bigocloud.net 中新建项目，复制appId和cer到strings_config.xml
+1. 将您的appId和cer到strings_config.xml
 2. 根据需求选中不同的target,然后点击run运行即可
 > 不同的target可以编出不同的demo
 > 1. all：包含所有feature的demo

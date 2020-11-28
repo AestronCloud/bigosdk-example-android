@@ -26,7 +26,8 @@
                 android:layout_marginTop="50dp"
                 android:layout_gravity="right"
                 android:layout_width="150dp"
-                android:layout_height="250dp"/>
+                android:layout_height="250dp"
+                android:background="@mipmap/bigo_logo_small"/>
         </FrameLayout>
 
     </sg.bigo.opensdk.api.struct.BigoRendererView>
@@ -123,7 +124,6 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/live_bottom_btn_margin"
                     android:layout_marginLeft="@dimen/live_bottom_btn_margin"
-                    android:visibility="gone"
                     android:background="@drawable/rounded_bg_full_transparent"
                     android:layout_weight="2"
                     android:scaleType="centerCrop"
@@ -166,7 +166,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/live_bottom_btn_margin"
                     android:layout_marginLeft="@dimen/live_bottom_btn_margin"
-                    android:visibility="gone"
                     android:background="@drawable/rounded_bg_full_transparent"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/icon_sticker_entrance" />

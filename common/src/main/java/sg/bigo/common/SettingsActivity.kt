@@ -28,10 +28,10 @@ import java.util.*
 
 open class SettingsActivity : BaseActivity() {
     private var mStatusBarHeight = -1
-    private lateinit var mVideoStatCheck: TextView
-    private lateinit var mMirrorLocalText: TextView
-    private lateinit var mMirrorRemoteText: TextView
-    private lateinit var mMirrorEncodeText: TextView
+    private lateinit var customCaptureEnabled: TextView
+//    private lateinit var mMirrorLocalText: TextView
+//    private lateinit var mMirrorRemoteText: TextView
+//    private lateinit var mMirrorEncodeText: TextView
     private lateinit var mSeekprogress: TextView
     private lateinit var mSeekBar: AppCompatSeekBar
     private val audioProfileConfigs: MutableMap<Int, Int> = HashMap()
@@ -75,6 +75,7 @@ open class SettingsActivity : BaseActivity() {
         audioProfileConfigs[R.id.MUSIC_STANDARD_STEREO] = 3
         audioProfileConfigs[R.id.MUSIC_HIGH_QUALITY] = 4
         audioProfileConfigs[R.id.MUSIC_HIGH_QUALITY_STEREO] = 5
+        audioProfileConfigs[R.id.SELF_ADAPTION] = 6
 
 
         audioScenarioConfigs[R.id.DEFAULT] = 0
@@ -83,6 +84,7 @@ open class SettingsActivity : BaseActivity() {
         audioScenarioConfigs[R.id.GAME_STREAMING] = 3
         audioScenarioConfigs[R.id.SHOWROOM] = 4
         audioScenarioConfigs[R.id.CHATROOM_GAMING] = 5
+        audioScenarioConfigs[R.id.CUSTOM] = 6
     }
 
     private fun initUI() {
@@ -93,7 +95,7 @@ open class SettingsActivity : BaseActivity() {
             GridLayoutManager(this, DEFAULT_SPAN)
         resolutionList.layoutManager = layoutManager
         mResolutionAdapter =
-            ResolutionAdapter(this, config().videoDimenIndex)
+            ResolutionAdapter(this, config().maxResolutionIdx)
         resolutionList.adapter = mResolutionAdapter
         resolutionList.addItemDecoration(mItemDecoration)
         mItemPadding =
@@ -107,18 +109,10 @@ open class SettingsActivity : BaseActivity() {
         mFpsAdapter = FpsAdapter(this, config().fpsIndex)
         framerateList.adapter = mFpsAdapter
         framerateList.addItemDecoration(mItemDecoration)
-        mVideoStatCheck =
-            findViewById(R.id.setting_stats_checkbox)
-        mVideoStatCheck.isActivated = config().ifShowVideoStats()
-        mMirrorLocalText =
-            findViewById(R.id.setting_mirror_local_value)
-        resetText(mMirrorLocalText, config().mirrorLocalIndex)
-        mMirrorRemoteText =
-            findViewById(R.id.setting_mirror_remote_value)
-        resetText(mMirrorRemoteText, config().mirrorRemoteIndex)
-        mMirrorEncodeText =
-            findViewById(R.id.setting_mirror_encode_value)
-        resetText(mMirrorEncodeText, config().mirrorEncodeIndex)
+        customCaptureEnabled =
+            findViewById(R.id.setting_custom_capture_checkbox)
+        customCaptureEnabled.isActivated = config().ifShowVideoStats()
+//        resetText(mMirrorEncodeText, config().mirrorEncodeIndex)
         mSeekBar = findViewById(R.id.bitrateSeekBar)
         mSeekBar.progress = config().bitrate
         mSeekprogress = findViewById(R.id.seekprogress)
@@ -137,6 +131,10 @@ open class SettingsActivity : BaseActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
+        debug_tool.setOnClickListener {
+            startActivity(Intent(this,DebugToolCfgActivity::class.java))
+        }
+        resolution_list.visibility = View.GONE;
         loadAudioConfigs()
     }
 
@@ -173,14 +171,19 @@ open class SettingsActivity : BaseActivity() {
         println("click view $view")
         saveResolution()
         saveShowStats()
+        saveCustomCapture()
         saveBitrate()
         saveFpsIdx()
         finish()
     }
 
+    private fun saveCustomCapture() {
+        config().isCustomCaptureEnabled = customCaptureEnabled.isActivated
+    }
+
     private fun saveResolution() {
         val profileIndex = mResolutionAdapter!!.selected
-        config().videoDimenIndex = profileIndex
+        config().maxResolutionIdx = profileIndex
         mPref!!.edit().putInt(Constants.PREF_RESOLUTION_IDX, profileIndex).apply()
     }
 
@@ -191,10 +194,10 @@ open class SettingsActivity : BaseActivity() {
     }
 
     private fun saveShowStats() {
-        config().setIfShowVideoStats(mVideoStatCheck.isActivated)
+        config().setIfShowVideoStats(customCaptureEnabled.isActivated)
         mPref!!.edit().putBoolean(
             Constants.PREF_ENABLE_STATS,
-            mVideoStatCheck.isActivated
+            customCaptureEnabled.isActivated
         ).apply()
     }
 
@@ -218,25 +221,6 @@ open class SettingsActivity : BaseActivity() {
         //        statsManager().enableStats(view.isActivated());
     }
 
-    fun onClick(view: View) {
-        var key: String? = null
-        var textView: TextView? = null
-        when (view.id) {
-            R.id.setting_mirror_local_view -> {
-                key = Constants.PREF_MIRROR_LOCAL
-                textView = mMirrorLocalText
-            }
-            R.id.setting_mirror_remote_view -> {
-                key = Constants.PREF_MIRROR_REMOTE
-                textView = mMirrorRemoteText
-            }
-            R.id.setting_mirror_encode_view -> {
-                key = Constants.PREF_MIRROR_ENCODE
-                textView = mMirrorEncodeText
-            }
-        }
-        textView?.let { showDialog(key, it) }
-    }
 
     private fun showDialog(key: String?, view: TextView) {
         val builder = AlertDialog.Builder(this)

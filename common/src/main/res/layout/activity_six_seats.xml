@@ -39,39 +39,87 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/up_mic"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="5dp"
-                android:src="@mipmap/icon_miclink_black"
-                android:layout_marginBottom="10dp"/>
+                android:id="@+id/live_btn_mute_audio"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_mute_audio" />
 
+            <ImageView
+                android:id="@+id/up_mic"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_miclink_black"/>
 
             <ImageView
                 android:id="@+id/bottom_action_end_call"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
                 android:onClick="onEndCallClicked"
+                android:scaleType="centerCrop"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@mipmap/btn_endcall"
-                android:layout_marginBottom="10dp"/>
+                android:layout_centerVertical="true"
+                android:src="@mipmap/btn_endcall"/>
 
 
             <ImageView
                 android:id="@+id/live_audio_quality_switch"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
                 android:onClick="onEndCallClicked"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_bg_full_transparent"
                 android:scaleType="centerCrop"
+                android:layout_centerVertical="true"
                 android:src="@drawable/icon_audio_quality_switch_bg"/>
+
+
+            <ImageView
+                android:id="@+id/btn_live_volume_type"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:padding="8dp"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_live_system_volume" />
+
+
+            <ImageView
+                android:id="@+id/btn_live_earback"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:padding="8dp"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_live_earback" />
+
+            <ImageView
+                android:id="@+id/btn_live_music_feature"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:padding="8dp"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_baseline_queue_music_24" />
 
         </LinearLayout>
 

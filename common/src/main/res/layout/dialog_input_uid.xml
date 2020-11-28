@@ -5,27 +5,38 @@
     xmlns:tool="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/op_tips"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:text="Input uid："
+        android:text="Input:"
         android:textSize="16sp"
         tool:layout_constraintHorizontal_bias="0.5"
         tool:layout_constraintHorizontal_chainStyle="packed"
         tool:layout_constraintStart_toStartOf="parent"
         tool:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_black_uid"
+
+    <TextView
+        android:id="@+id/tv_urls"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:maxLength = "20"
-        tool:layout_constraintBottom_toBottomOf="@+id/textView2"
+        android:layout_margin="16dp"
+        android:text=""
+        android:textSize="16sp"
+        tool:layout_constraintHorizontal_bias="0.5"
+        tool:layout_constraintHorizontal_chainStyle="packed"
+        tool:layout_constraintStart_toStartOf="@id/op_tips"
+        tool:layout_constraintTop_toBottomOf="@id/op_tips" />
+
+    <EditText
+        android:id="@+id/et_black_uid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength = "200"
         tool:layout_constraintEnd_toEndOf="parent"
         tool:layout_constraintHorizontal_bias="0.5"
-        tool:layout_constraintStart_toEndOf="@+id/textView2"
-        tool:layout_constraintTop_toTopOf="@+id/textView2" />
+        tool:layout_constraintStart_toStartOf="@+id/tv_urls"
+        tool:layout_constraintTop_toBottomOf="@+id/tv_urls" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

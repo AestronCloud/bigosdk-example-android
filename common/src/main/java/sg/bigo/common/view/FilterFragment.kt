@@ -83,6 +83,10 @@ class FilterFragment : BeautifyFragment() {
                     selectPos = position
                     getSeekBar().progress = filter.defaultStrength
                     LiveApplication.avEngine().setBeautifyFilter(filter.getResourcePath(),filter.defaultStrength)
+
+                    LiveApplication.avEngine().setMediaSideFlags(true,true,0)
+                    LiveApplication.avEngine().sendMediaSideInfo("click filter,SendSeiInAudio.")
+
                     notifyDataSetChanged()
                 }
 

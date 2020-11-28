@@ -1,9 +1,8 @@
 package sg.bigo.common
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_1v1_voice.*
 import kotlinx.android.synthetic.main.activity_six_seats.*
-import kotlinx.android.synthetic.main.activity_six_seats.live_audio_quality_switch
+import kotlinx.android.synthetic.main.activity_six_seats.channel_name
+import kotlinx.android.synthetic.main.activity_six_seats.mic_list
+import kotlinx.android.synthetic.main.activity_six_seats.up_mic
 import kotlinx.android.synthetic.main.seat_item.view.*
 import sg.bigo.common.LiveApplication.Companion.avEngine
 import sg.bigo.common.utils.ToastUtils
@@ -23,18 +23,43 @@ import sg.bigo.opensdk.api.IAVEngineCallback
 import sg.bigo.opensdk.api.IDeveloperMock.CommonCallback
 import sg.bigo.opensdk.api.callback.JoinChannelCallback
 import sg.bigo.opensdk.api.callback.OnUserInfoNotifyCallback
-import sg.bigo.opensdk.api.impl.JoinChannelCallbackParams
+import sg.bigo.opensdk.api.impl.ChannelInfo
 import sg.bigo.opensdk.api.struct.ChannelMicUser
 import sg.bigo.opensdk.api.struct.UserInfo
 import kotlin.properties.Delegates
-
+import sg.bigo.common.view.SoundEffectFragment
 
 class SixSeatVoiceActivity : BaseActivity() {
     private val mIAVEngine = avEngine()
-    private val mUIHandler = Handler(Looper.getMainLooper());
+
     private var mMyUid: Long = 0
 
-    private var mRole: Int = AVEngineConstant.ClientRole.ROLE_AUDIENCE
+    private var mRole: Int by Delegates.observable(-1, { _, _, newValue ->
+        runOnUiThread {
+            if (isBroadcaster(newValue)) {
+                showBroadCastView()
+            } else {
+                showAudienceView()
+            }
+        }
+    })
+
+    private fun showAudienceView() {
+        btn_live_volume_type.visibility = View.GONE
+        btn_live_earback.visibility = View.GONE
+        live_btn_mute_audio.visibility = View.GONE
+        btn_live_music_feature.visibility = View.GONE
+        live_audio_quality_switch.visibility = View.GONE
+    }
+
+    private fun showBroadCastView() {
+        btn_live_volume_type.visibility = View.VISIBLE
+        btn_live_earback.visibility = View.VISIBLE
+        live_btn_mute_audio.visibility = View.VISIBLE
+        btn_live_music_feature.visibility = View.VISIBLE
+        live_audio_quality_switch.visibility = View.VISIBLE
+    }
+
 
     private fun showMicOpView() {
         if(isBroadcaster(mRole)) {
@@ -82,14 +107,39 @@ class SixSeatVoiceActivity : BaseActivity() {
 
         up_mic.setOnClickListener {
             if (mRole == AVEngineConstant.ClientRole.ROLE_BROADCAST) {
+                SoundEffectFragment.resetMusic()
                 mRole = AVEngineConstant.ClientRole.ROLE_AUDIENCE
             } else {
                 mRole = AVEngineConstant.ClientRole.ROLE_BROADCAST
             }
             mIAVEngine.setClientRole(mRole)
+
             showMicOpView()
         }
         showMicOpView()
+
+        live_btn_mute_audio.isActivated = true
+        live_btn_mute_audio.setOnClickListener { view ->
+            mIAVEngine.muteLocalAudioStream(view.isActivated)
+            view.isActivated = !view.isActivated
+        }
+
+        btn_live_volume_type.isActivated = false
+        btn_live_volume_type.setOnClickListener { view ->
+            mIAVEngine.setUserCallMode(!mIAVEngine.isUseCommunicationMode())
+            view.isActivated = !view.isActivated
+        }
+
+        btn_live_earback.isActivated = true
+        btn_live_earback.setOnClickListener { view ->
+            mIAVEngine.enableInEarMonitoring(view.isActivated)
+            view.isActivated = !view.isActivated
+        }
+
+        btn_live_music_feature.setOnClickListener {
+            startActivity(Intent(this,SoundEffectSettingActivity::class.java))
+        }
+
 
         live_audio_quality_switch.isActivated = false
         live_audio_quality_switch.setOnClickListener {
@@ -128,7 +178,7 @@ class SixSeatVoiceActivity : BaseActivity() {
                     holder.itemView.iv_muted.visibility = View.GONE
                 } else {
                     val me = if(micInfo.uid == mMyUid) "我" else ""
-                    holder.itemView.tv_uid.text = "${me} ${micInfo.uid}"
+                    holder.itemView.tv_uid.text = "$me ${micInfo.uid}"
 
                     holder.itemView.iv_speaking.visibility = View.VISIBLE
                     holder.itemView.iv_muted.visibility = View.VISIBLE
@@ -200,19 +250,20 @@ class SixSeatVoiceActivity : BaseActivity() {
                         mMyUid,
                         mChannelName,
                         mUserName,
-                        getString(R.string.bigo_cert),
-                        object : CommonCallback<String?> {
+                        LiveApplication.cert,
+                        TokenCallbackProxy(object : CommonCallback<String?> {
                             override fun onResult(token: String?) {
                                 mIAVEngine.joinChannel(
-                                    token,
-                                    mChannelName,
-                                    mMyUid,
-                                    mJoinChannelCallback
+                                        token,
+                                        mChannelName,
+                                        mMyUid,
+                                        LiveApplication.config.liveExtraInfo,
+                                        mJoinChannelCallback
                                 )
                             }
 
                             override fun onError(i: Int) {}
-                        })
+                        }))
                 } ?: let {
                     ToastUtils.show("获取媒体uid失败")
                 }
@@ -227,8 +278,8 @@ class SixSeatVoiceActivity : BaseActivity() {
     }
 
     private val mJoinChannelCallback: JoinChannelCallback = object : JoinChannelCallback {
-        override fun onSuccess(joinChannelCallbackParams: JoinChannelCallbackParams) {
-            mMyUid = joinChannelCallbackParams.uid
+        override fun onSuccess(ChannelInfo: ChannelInfo) {
+            mMyUid = ChannelInfo.uid
         }
 
         override fun onTokenVerifyError(s: String) {
@@ -236,7 +287,7 @@ class SixSeatVoiceActivity : BaseActivity() {
             finish()
         }
         override fun onFailed(code: Int) {
-            ToastUtils.show("进房失败，错误码 $code")
+            ToastUtils.showJoinChannelErrTips(code)
             finish()
         }
     }
@@ -287,6 +338,11 @@ class SixSeatVoiceActivity : BaseActivity() {
 
                 mic_list.adapter!!.notifyDataSetChanged()
             }
+            if(channelMicUser.uid == mMyUid) {
+                mIAVEngine.muteLocalAudioStream(false)
+            } else {
+                mIAVEngine.muteRemoteAudioStream(channelMicUser.uid,false)
+            }
 
         }
 
@@ -313,6 +369,13 @@ class SixSeatVoiceActivity : BaseActivity() {
 
         override fun onSpeakerChange(speakingUids: LongArray?) {
             runOnUiThread {
+                for (mic in mics) {
+                    val result = findExistMic(mic.uid)
+                    result?.let {
+                        result.speaking = false
+                    }
+                }
+
                 speakingUids?.let {
                     for (uid in it) {
                         val result = findExistMic(uid)
@@ -358,6 +421,11 @@ class SixSeatVoiceActivity : BaseActivity() {
     }
 
     private fun leaveRoom() {
+        SoundEffectFragment.isPlayingMixSound = false
+        for(i in 0 until SoundEffectFragment.isPlayingEffectSounds.size) {
+            SoundEffectFragment.isPlayingEffectSounds[i] = false
+        }
+
         mIAVEngine.enableLocalVideo(true)
         mIAVEngine.removeCallback(mVoiceLiveCallback)
         mIAVEngine.leaveChannel()

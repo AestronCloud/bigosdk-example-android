@@ -235,6 +235,27 @@
                     android:textSize="@dimen/text_size_large"
                     android:visibility="gone" />
 
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_pk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/start_broadcast_height"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/start_broadcast_radius"
+                    android:background="@drawable/start_broadcast_bg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/start_broadcast_padding"
+                    android:paddingLeft="@dimen/start_broadcast_padding"
+                    android:paddingEnd="@dimen/start_broadcast_padding"
+                    android:paddingRight="@dimen/start_broadcast_padding"
+                    android:text="@string/tips_pk"
+                    android:textAlignment="gravity"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="gone" />
+
             </LinearLayout>
 
         </ScrollView>

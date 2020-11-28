@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+    <LinearLayout
+        android:id="@+id/top_area"
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/rounded_bg"
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            app:paddingEnd="12dp">
+
+            <TextView
+                android:id="@+id/tv_live_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_video_debug_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#60000000"
+            android:enabled="false"
+            android:focusable="false"
+            android:layout_marginTop="30dp"
+            android:focusableInTouchMode="false"
+            android:maxLines="100"
+            android:scrollbars="vertical"
+            android:shadowColor="#7f000000"
+            android:shadowDy="2"
+            android:shadowRadius="2"
+            android:textColor="#FF00E000" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_debug_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#A0A0A0A0"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="debug" />
+
+    <sg.bigo.opensdk.api.struct.BigoRendererView
+        android:id="@+id/sv_live_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <sg.bigo.common.view.SimpleMicView
+                android:id="@+id/canvas_left"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="9:16"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <sg.bigo.common.view.SimpleMicView
+                android:id="@+id/canvas_right"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="9:16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <sg.bigo.common.view.SimpleMicView
+            android:id="@+id/canvas_full"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </sg.bigo.opensdk.api.struct.BigoRendererView>
+
+
+    <LinearLayout
+        android:id="@+id/bottom_action_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_margin="12dp">
+
+            <Button
+                android:id="@+id/live_transcoding_cfg"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:text="@string/tips_merge_stream" />
+
+            <Button
+                android:id="@+id/live_transcoding_start"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:text="@string/tips_start_merge_stream" />
+
+            <Button
+                android:id="@+id/live_transcoding_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:text="@string/tips_stop_merge_stream" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_margin="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_swtich_camera"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/btn_switch_camera" />
+
+            <ImageView
+                android:id="@+id/live_btn_mute_audio"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_mute_audio" />
+
+            <ImageView
+                android:id="@+id/live_btn_mute_video"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/btn_mute_video" />
+
+
+            <ImageView
+                android:id="@+id/icon_pk"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_pk" />
+
+            <TextView
+                android:id="@+id/live_add_publish_stream_url"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:padding="1dp"
+                android:text="RTMP"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                />
+
+            <sg.bigo.common.view.ElideTextView
+                android:id="@+id/live_remove_publish_stream_url"
+                android:layout_width="@dimen/live_bottom_btn_size"
+                android:layout_height="@dimen/live_bottom_btn_size"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                android:padding="0dp"
+                android:text="RTMP"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/rounded_bg_full_transparent"
+                android:scaleType="centerCrop"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

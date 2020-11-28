@@ -13,6 +13,24 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+
+        def appid = System.getenv("TOB_APPID") ?: "请填写你自己的appid"
+        def cert = System.getenv("TOB_CERT") ?: "请填写你自己的证书"
+        def ip = System.getenv("TOB_IP") ?: "请填写你自己的ip"
+        def port = (System.getenv("TOB_PORT") ?: "65537")
+        def is_use_test_mode = (System.getenv("TOB_USE_TEST_MODE") ?: "false")
+        def is_test_env = (System.getenv("TOB_IS_TEST_ENV") ?: "false")
+
+
+        println("appid: ${appid} cert: ${cert} ip: ${ip} port ${port} is_test_env ${is_test_env} is_use_test_mode ${is_use_test_mode}")
+
+        buildConfigField("String", "APPID", "\"" + appid + "\"")
+        buildConfigField("String", "CERT", "\"" + cert + "\"")
+        buildConfigField("String", "IP", "\"" + ip + "\"")
+        buildConfigField("Integer", "PORT", String.valueOf(port))
+        buildConfigField("Boolean","IS_TEST_ENV",String.valueOf(is_test_env))
+        buildConfigField("Boolean","USE_TEST_MODE",String.valueOf(is_use_test_mode))
     }
 
     repositories {
@@ -36,8 +54,25 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            signingConfig signingConfigs.release
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a"
+            }
+
+
         }
     }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+        packagingOptions {
+            exclude 'cpp/lib/arm64-v8a/libpollyaudio.so'
+            exclude 'cpp/lib/armeabi-v7a/libpollyaudio.so'
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -46,13 +81,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
-    compileOnly(name: 'bigo-video', ext: 'aar')
-
+    compileOnly(name: 'bigo-advanced-beauty', ext: 'aar')
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

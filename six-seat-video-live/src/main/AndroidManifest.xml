@@ -17,6 +17,11 @@
             android:screenOrientation="portrait"/>
         <activity android:name="sg.bigo.common.LiveNameInputActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name="sg.bigo.common.DebugToolCfgActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity android:name="sg.bigo.common.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

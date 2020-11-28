@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_1v1_voice.live_btn_mute_audio
 import kotlinx.android.synthetic.main.activity_1v1_voice.tvLiveInfo
 import kotlinx.android.synthetic.main.activity_1v1_voice.tv_debug_toggle
 import kotlinx.android.synthetic.main.activity_1v1_voice.tv_video_debug_info
-import kotlinx.android.synthetic.main.activity_multi_live.*
 import sg.bigo.common.annotation.NonNull
 import sg.bigo.common.utils.ToastUtils
 import sg.bigo.opensdk.api.AVEngineConstant
@@ -19,7 +18,7 @@ import sg.bigo.opensdk.api.IAVEngineCallback
 import sg.bigo.opensdk.api.IDeveloperMock
 import sg.bigo.opensdk.api.callback.JoinChannelCallback
 import sg.bigo.opensdk.api.callback.OnUserInfoNotifyCallback
-import sg.bigo.opensdk.api.impl.JoinChannelCallbackParams
+import sg.bigo.opensdk.api.impl.ChannelInfo
 import sg.bigo.opensdk.api.struct.ChannelMicUser
 import sg.bigo.opensdk.api.struct.UserInfo
 import kotlin.properties.Delegates
@@ -59,7 +58,7 @@ class One2OneVoiceActivity : BaseActivity() {
             leaveRoom()
         }
 
-        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.CHANNEL_PROFILE_COMMUNICATION)
+        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.COMMUNICATION)
         mAVEngine.addCallback(mLiveCallback)
     }
 
@@ -114,20 +113,20 @@ class One2OneVoiceActivity : BaseActivity() {
     private fun joinRoom() {
         mAVEngine.enableLocalVideo(false)
         mAVEngine.setEnableSpeakerphone(false)
-        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.CHANNEL_PROFILE_COMMUNICATION)
+        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.COMMUNICATION)
         mAVEngine.registerLocalUserAccount(mUserName,object :OnUserInfoNotifyCallback{
             override fun onNotifyUserInfo(user: UserInfo?) {
                 user?.let {
                     mMyUid = user.uid
-                    mAVEngine.developerMock.getToken(mMyUid, mChannelName, mUserName, getString(R.string.bigo_cert), object : IDeveloperMock.CommonCallback<String> {
+                    mAVEngine.developerMock.getToken(mMyUid, mChannelName, mUserName, LiveApplication.cert, TokenCallbackProxy(object : IDeveloperMock.CommonCallback<String?> {
                         override fun onResult(token: String?) {
-                            mAVEngine.joinChannel(token, mChannelName, mMyUid, mJoinChannelCallback)
+                            mAVEngine.joinChannel(token, mChannelName, mMyUid, LiveApplication.config.liveExtraInfo, mJoinChannelCallback)
                         }
 
                         override fun onError(reason: Int) {
                             println("$TAG getToken error $reason")
                         }
-                    })
+                    }))
                 } ?: let {
                     ToastUtils.show("获取媒体uid失败")
                 }
@@ -141,12 +140,12 @@ class One2OneVoiceActivity : BaseActivity() {
     }
 
     private val mJoinChannelCallback = object : JoinChannelCallback {
-        override fun onSuccess(params: JoinChannelCallbackParams?) {
+        override fun onSuccess(params: ChannelInfo?) {
             mMyUid = params!!.uid
         }
 
         override fun onFailed(reason: Int) {
-            Toast.makeText(this@One2OneVoiceActivity, getString(R.string.tips_enter_room_failed), Toast.LENGTH_LONG).show()
+            ToastUtils.showJoinChannelErrTips(reason)
             this@One2OneVoiceActivity.finish()
         }
 
@@ -178,7 +177,7 @@ class One2OneVoiceActivity : BaseActivity() {
             println("$TAG sth error $err")
         }
 
-        override fun onKicked(reason: Int) {
+        override fun onKicked() {
             ToastUtils.show(getString(R.string.tips_be_kicked_suggest))
             this@One2OneVoiceActivity.finish()
         }

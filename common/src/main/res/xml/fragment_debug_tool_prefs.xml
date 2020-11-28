@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/tips_live_config">
+
+        <EditTextPreference
+            android:defaultValue="我上麦了"
+            android:dialogTitle="@string/debug_cfg_live_extra_info"
+            android:key="key_debug_cfg_extra_live_info"
+            android:title="@string/debug_cfg_live_extra_info"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:defaultValue="24"
+            android:dialogTitle="@string/debug_cfg_video_frame_rate"
+            android:entries="@array/video_frame_rate"
+            android:entryValues="@array/video_frame_rate_values"
+            android:key="key_debug_cfg_video_frame_rate"
+            android:title="@string/debug_cfg_video_frame_rate"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="@string/debug_cfg_is_enable_custom_capture"
+            android:key="key_debug_enable_custom_capture"
+            android:title="@string/debug_cfg_is_enable_custom_capture"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="@string/debug_cfg_open_multi_view_mode"
+            android:key="key_debug_cfg_enable_multi_view"
+            android:title="@string/debug_cfg_open_multi_view_mode"
+        app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="自定义采集是否镜像"
+            android:key="key_debug_cfg_enable_mirror"
+            android:title="自定义采集是否镜像"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="自定义采集是否翻转"
+            android:key="key_debug_cfg_enable_updown"
+            android:title="自定义采集是否翻转"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+            android:defaultValue="123456789"
+            android:dialogTitle="@string/debug_cfg_custom_uid"
+            android:key="key_debug_cfg_custom_uid"
+            android:title="@string/debug_cfg_custom_uid"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:dialogTitle="@string/debug_cfg_custom_uid"
+            android:key="key_debug_cfg_enable_custom_uid"
+            android:title="@string/debug_cfg_enable_custom_uid"
+            app:useSimpleSummaryProvider="true" />
+
+
+        <EditTextPreference
+            android:defaultValue=""
+            android:dialogTitle="@string/key_debug_cfg_auto_publish_and_livetrancoding"
+            android:key="key_debug_cfg_auto_publish_and_livetrancoding"
+            android:title="@string/key_debug_cfg_auto_publish_and_livetrancoding"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/custom_env">
+        <EditTextPreference
+            android:defaultValue="xxx.xxx.xxx.xxx"
+            android:dialogTitle="@string/debug_lbs_ip"
+            android:key="key_debug_cfg_lbs_ip"
+            android:title="@string/debug_lbs_ip"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:defaultValue="xxxx"
+            android:dialogTitle="@string/debug_lbs_port"
+            android:key="key_debug_cfg_lbs_port"
+            android:title="@string/debug_lbs_port"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dialogTitle="@string/debug_cfg_is_test_env"
+            android:key="key_debug_cfg_is_test_env"
+            android:title="@string/debug_cfg_is_test_env"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:dialogTitle="@string/debug_env_enabled"
+            android:key="key_debug_cfg_env_enabled"
+            android:title="@string/debug_env_enabled"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/debug_cfg_custom_appid_and_cert">
+        <EditTextPreference
+            android:defaultValue="@string/bigo_app_id"
+            android:dialogTitle="@string/debug_appid"
+            android:key="key_debug_cfg_appid"
+            android:title="@string/debug_appid"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:defaultValue="@string/bigo_cert"
+            android:dialogTitle="@string/debug_cert"
+            android:key="key_debug_cfg_cert"
+            android:title="@string/debug_cert"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/debug_cfg_custom_token">
+        <EditTextPreference
+            android:defaultValue="0016f08222zln1c8sf41weg9hcn0sx1qvp2ABS2dfkorLJRUcG9JlIboOpnnh4a8RInOmwf9z0+a09LP1+XjlAAAVGA"
+            android:dialogTitle="@string/debug_cfg_custom_token"
+            android:key="key_debug_cfg_custom_temp_token"
+            android:title="@string/debug_cfg_custom_token"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            android:dialogTitle="@string/debug_cfg_enable_temp_token"
+            android:key="key_debug_enable_temp_token"
+            android:title="@string/debug_cfg_enable_temp_token"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -4,9 +4,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +21,7 @@ import sg.bigo.opensdk.api.IAVEngineCallback
 import sg.bigo.opensdk.api.IDeveloperMock.CommonCallback
 import sg.bigo.opensdk.api.callback.JoinChannelCallback
 import sg.bigo.opensdk.api.callback.OnUserInfoNotifyCallback
-import sg.bigo.opensdk.api.impl.JoinChannelCallbackParams
+import sg.bigo.opensdk.api.impl.ChannelInfo
 import sg.bigo.opensdk.api.struct.ChannelMicUser
 import sg.bigo.opensdk.api.struct.UserInfo
 import sg.bigo.opensdk.api.struct.VideoCanvas
@@ -32,7 +29,6 @@ import sg.bigo.opensdk.api.struct.VideoCanvas
 
 class SixSeatVideoActivity : BaseActivity() {
     private val mIAVEngine = avEngine()
-    private val mUIHandler = Handler(Looper.getMainLooper());
     private var mMyUid: Long = 0
 
     private var mRole: Int = AVEngineConstant.ClientRole.ROLE_AUDIENCE
@@ -226,19 +222,20 @@ class SixSeatVideoActivity : BaseActivity() {
                         mMyUid,
                         mChannelName,
                         mUserName,
-                        getString(R.string.bigo_cert),
-                        object : CommonCallback<String?> {
+                        LiveApplication.cert,
+                        TokenCallbackProxy(object : CommonCallback<String?> {
                             override fun onResult(token: String?) {
                                 mIAVEngine.joinChannel(
-                                    token,
-                                    mChannelName,
-                                    mMyUid,
-                                    mJoinChannelCallback
+                                        token,
+                                        mChannelName,
+                                        mMyUid,
+                                        LiveApplication.config.liveExtraInfo,
+                                        mJoinChannelCallback
                                 )
                             }
 
                             override fun onError(i: Int) {}
-                        })
+                        }))
                 } ?: let {
                     ToastUtils.show("获取媒体uid失败")
                 }
@@ -253,8 +250,8 @@ class SixSeatVideoActivity : BaseActivity() {
     }
 
     private val mJoinChannelCallback: JoinChannelCallback = object : JoinChannelCallback {
-        override fun onSuccess(joinChannelCallbackParams: JoinChannelCallbackParams) {
-            mMyUid = joinChannelCallbackParams.uid
+        override fun onSuccess(ChannelInfo: ChannelInfo) {
+            mMyUid = ChannelInfo.uid
         }
 
         override fun onTokenVerifyError(s: String) {
@@ -262,7 +259,7 @@ class SixSeatVideoActivity : BaseActivity() {
             finish()
         }
         override fun onFailed(code: Int) {
-            ToastUtils.show("进房失败，错误码 $code")
+            ToastUtils.showJoinChannelErrTips(code)
             finish()
         }
     }

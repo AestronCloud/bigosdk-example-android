@@ -12,6 +12,7 @@
 
         <activity android:name="sg.bigo.common.BasicBeauty1v1VideoActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize"/>
         <activity android:name="sg.bigo.common.SettingsActivity"
             android:screenOrientation="portrait"/>
@@ -19,6 +20,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name="sg.bigo.common.BasicBeautifySettingActivity"
             android:theme="@style/myTransparent"
+            />
+        <activity android:name="sg.bigo.common.DebugToolCfgActivity"
+            android:screenOrientation="portrait"
             />
         <activity android:name="sg.bigo.common.MainActivity"
             android:launchMode="singleTop"

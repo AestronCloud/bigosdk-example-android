@@ -3,13 +3,15 @@ package sg.bigo.common
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import sg.bigo.common.utils.WindowUtil
 import sg.bigo.opensdk.api.AVEngineConstant
+import sg.bigo.opensdk.api.IDeveloperMock
 import sg.bigo.opensdk.utils.Log
 
 abstract class BaseActivity : AppCompatActivity() {
-    private val mUIHandler = Handler(Looper.getMainLooper())
+    public val mUIHandler = Handler(Looper.getMainLooper())
     protected var mDestroyed = false
 
     private val loger: Log.ILog? by lazy {
@@ -63,6 +65,23 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onStop() {
         mDestroyed = (isFinishing && !isChangingConfigurations)
         super.onStop()
+    }
+
+    class TokenCallbackProxy : IDeveloperMock.CommonCallback<String> {
+        val callback: IDeveloperMock.CommonCallback<String?>
+
+        constructor(callback: IDeveloperMock.CommonCallback<String?>) {
+            this.callback = callback
+        }
+
+        override fun onResult(result: String?) {
+            callback.onResult(LiveApplication.config.getFinalToken(result ?: ""))
+        }
+
+        override fun onError(errCode: Int) {
+            callback.onError(errCode)
+        }
+
     }
 
     fun clearAllBeautyConfig() {

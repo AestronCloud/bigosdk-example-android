@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <sg.bigo.opensdk.api.struct.RendererCanvas
+        android:id="@+id/renderer_canvas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_user_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="用户：masami(12345)" />
+
+    <TextView
+        android:id="@+id/tv_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_user_info"
+        android:layout_alignStart="@+id/tv_user_info"
+        android:layout_alignLeft="@+id/tv_user_info"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_info"
+        tools:text="uid:1234" />
+
+    <TextView
+        android:id="@+id/tv_server_mute_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_uid"
+        android:layout_alignStart="@+id/tv_uid"
+        android:layout_alignLeft="@+id/tv_uid"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_uid"
+        app:layout_constraintTop_toBottomOf="@+id/tv_uid"
+        tools:text="音频：开，视频：关" />
+
+    <sg.bigo.common.view.SelectableImageView
+        android:id="@+id/iv_mute_audio"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:src="@mipmap/btn_mute"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_mute_video"
+        app:layout_constraintStart_toEndOf="@+id/iv_mute_video"
+        app:layout_constraintTop_toTopOf="@+id/iv_mute_video"
+        tools:visibility="visible" />
+
+    <sg.bigo.common.view.SelectableImageView
+        android:id="@+id/iv_mute_video"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:src="@mipmap/mute_video"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        android:text="本地--"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/tv_server_mute_status"
+        app:layout_constraintTop_toBottomOf="@+id/tv_server_mute_status"
+        tools:visibility="visible" />
+
+</merge>

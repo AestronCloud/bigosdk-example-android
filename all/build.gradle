@@ -59,7 +59,7 @@ android {
 dependencies {
     implementation project(':common-beauty')
     if(!isDebug()) {
-        runtimeOnly(name: 'bigo-video', ext: 'aar')
+        runtimeOnly(name: 'bigo-advanced-beauty', ext: 'aar')
     }
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

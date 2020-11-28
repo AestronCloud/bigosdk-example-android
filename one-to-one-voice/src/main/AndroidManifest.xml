@@ -12,11 +12,19 @@
 
         <activity android:name="sg.bigo.common.One2OneVoiceActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize"/>
         <activity android:name="sg.bigo.common.SettingsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="sg.bigo.common.LiveNameInputActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="sg.bigo.common.DebugToolCfgActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.SoundEffectSettingActivity"
+            android:theme="@style/myTransparent"
+            />
         <activity android:name="sg.bigo.common.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

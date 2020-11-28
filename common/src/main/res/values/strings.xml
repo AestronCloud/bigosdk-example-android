@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Bigo OpenLive</string>
-    <string name="tips_powered" translatable="false">Powered by bigo.sg 1.0.0</string>
+    <string name="app_name">Bigo OpenLive</string>
+    <string name="tips_powered">Powered by bigo.sg %1$s</string>
     <string name="title_welcome_to_live">Welcome to Bigo Open Live</string>
     <string name="tips_regist_user_account">Please input your account name</string>
     <string name="tips_input_room_name">Please input the live\'s name</string>
@@ -56,20 +56,22 @@
     <string name="setting_title">Settings</string>
     <string name="setting_resolution_title">Resolution</string>
     <string name="setting_frame_rate">Framerate</string>
-    <string name="setting_stats_title">Show video statistics</string>
+    <string name="setting_enable_custom_capture">Enable Custom Capture</string>
 
     <string name="setting_mirror_local_title">Local video preview mirror mode</string>
     <string name="setting_mirror_remote_title">Remote video render mirror mode</string>
     <string name="setting_mirror_encode_title">Local video encode mirror mode</string>
     <string name="tips_for_white_list">white list</string>
     <string name="tips_for_black_list">black list</string>
+    <string name="tips_pk" translatable="false">PK</string>
+    <string name="tips_pk_go" translatable="false">Go PK room</string>
+
 
 
     <string-array name="string_array_resolutions">
-        <item>320x240</item>
-        <item>480x360</item>
+        <item>480x270</item>
         <item>640x360</item>
-        <item>640x480</item>
+        <item>854x480</item>
         <item>960x540</item>
         <item>1280x720</item>
     </string-array>
@@ -83,4 +85,107 @@
         <item>30fps</item>
     </string-array>
 
+
+
+    <string name="category_network" translatable="false">无线和网络</string>
+    <string name="category_device" translatable="false">设备</string>
+    <string name="category_system" translatable="false">系统</string>
+    <string name="tips_trancoding_user_add">add transcoding user</string>
+    <string name="tips_uid">uid</string>
+    <string name="tips_transcoding_user">Transcoding user</string>
+    <string name="tips_transcoding_cfg">transcoding config</string>
+    <string name="title_for_users_op">Action</string>
+    <string name="tips_bigo_image_setting">setup image config</string>
+    <string name="tips_merge_stream">merge stream config</string>
+    <string name="tips_start_merge_stream">start merge stream</string>
+    <string name="tips_stop_merge_stream">stop_merge_stream</string>
+    <string name="tips_sound_effect">sound effect</string>
+    <string name="tips_is_send_to_remote">is should send to remote</string>
+    <string name="tips_start_play_mix">start play mix</string>
+    <string name="tips_pause_play_mix">pause play mix</string>
+    <string name="tips_title_mix_sound">play mix sound</string>
+    <string name="tips_effect_play">play effect</string>
+    <string name="str_debug_tool">debug tool</string>
+    <string name="debug_lbs_ip" translatable="false">Lbs ip</string>
+    <string name="debug_cfg_live_extra_info">Live Extra Info</string>
+    <string name="debug_cfg_video_frame_rate">Video Frame Rate</string>
+    <string name="tips_live_config">Live Config</string>
+    <string name="debug_lbs_port" translatable="false">Lbs Port</string>
+    <string name="debug_appid" translatable="false">AppId</string>
+    <string name="debug_cert" translatable="false">cert</string>
+    <string name="debug_env_enabled">is enable custom env?</string>
+    <string name="custom_env">custom develop env</string>
+    <string name="debug_cfg_is_test_env">is test env</string>
+    <string name="debug_cfg_custom_token">custom temp token</string>
+    <string name="debug_cfg_enable_temp_token">is enable temp token</string>
+    <string name="debug_cfg_custom_appid_and_cert">custom appid and cert</string>
+    <string name="debug_cfg_is_enable_custom_capture">is enable custom custom capture</string>
+    <string name="debug_cfg_custom_uid">custom uid</string>
+    <string name="debug_cfg_enable_custom_uid">is enable custom uid</string>
+    <string name="debug_cfg_open_multi_view_mode">打开多view模式</string>
+    <string name="tips_stop_live_transcoding">触发合流</string>
+    <string name="key_debug_cfg_auto_publish_and_livetrancoding">进房自动旁路转推自动合流url配置</string>
+
+    <array name="time_zone">
+        <item>GMT - 00:00</item>
+        <item>GMT - 01:00</item>
+        <item>GMT - 02:00</item>
+        <item>GMT - 03:00</item>
+        <item>GMT - 04:00</item>
+        <item>GMT - 05:00</item>
+        <item>GMT - 06:00</item>
+        <item>GMT - 07:00</item>
+        <item>GMT - 08:00</item>
+        <item>GMT - 09:00</item>
+        <item>GMT - 10:00</item>
+        <item>GMT - 11:00</item>
+        <item>GMT - 12:00</item>
+        <item>GMT - 13:00</item>
+        <item>GMT - 14:00</item>
+        <item>GMT - 15:00</item>
+        <item>GMT - 16:00</item>
+        <item>GMT - 17:00</item>
+        <item>GMT - 18:00</item>
+        <item>GMT - 19:00</item>
+        <item>GMT - 20:00</item>
+        <item>GMT - 21:00</item>
+        <item>GMT - 22:00</item>
+        <item>GMT - 23:00</item>
+    </array>
+
+    <string-array name="video_codec_profile">
+        <item>BASELINE</item>
+        <item>MAIN</item>
+        <item>HIGH</item>
+    </string-array>
+
+    <string-array name="audio_sample_rate">
+        <item>TYPE_32000</item>
+        <item>TYPE_44100</item>
+        <item>TYPE_48000</item>
+    </string-array>
+
+
+    <string-array name="video_frame_rate">
+        <item>1fps</item>
+        <item>7fps</item>
+        <item>10fps</item>
+        <item>15fps</item>
+        <item>24fps</item>
+        <item>30fps</item>
+    </string-array>
+    
+    <string-array name="video_frame_rate_values">
+        <item>1</item>
+        <item>7</item>
+        <item>10</item>
+        <item>15</item>
+        <item>24</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="audio_codec_profile">
+        <item>LC_AAC</item>
+        <item>HE_AAC</item>
+    </string-array>
 </resources>

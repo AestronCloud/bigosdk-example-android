@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.util.Log;
 
 public class Decompress {
@@ -102,4 +104,89 @@ public class Decompress {
             }
         }
     }
+
+
+    public static int copyAssetsFile2Phone(String srcName, String dest) {
+        File file = new File(dest + "/" + srcName);
+        try {
+            InputStream inputStream = ResourceUtils.INSTANCE.getAssetManager().open(srcName);
+
+            if (!file.exists() || file.length() == 0) {
+                file.mkdirs();
+                file.createNewFile();
+
+                FileOutputStream fos = new FileOutputStream(file);//如果文件不存在，FileOutputStream会自动创建文件
+                int len;
+                byte[] buffer = new byte[1024];
+                while ((len = inputStream.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.flush();//刷新缓存区
+                inputStream.close();
+                fos.close();
+            }
+        } catch (IOException e) {
+            file.delete();
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
+    }
+
+    public static boolean copyAssets(String assetsName, String dest) {
+        AssetManager assetManager = ResourceUtils.INSTANCE.getAssetManager();
+        boolean result = false;
+        InputStream in = null;
+        OutputStream out = null;
+        File outFile = new File(dest, assetsName);
+        if(outFile.exists()) {
+            return true;
+        }
+        try {
+            in = assetManager.open(assetsName);
+
+
+            outFile.getParentFile().mkdirs();
+
+            out = new FileOutputStream(outFile);
+            copyFile(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+            result = true;
+        } catch (IOException e) {
+            outFile.delete();
+            result = false;
+            Log.e("tag", "Failed to copy asset file: " + assetsName, e);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return result;
+        }
+    }
+
+    private static void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
 }

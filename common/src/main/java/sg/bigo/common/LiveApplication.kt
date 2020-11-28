@@ -2,14 +2,15 @@ package sg.bigo.common
 
 import android.app.Application
 import android.content.Context
-import kotlinx.android.synthetic.main.activity_live_name_input.*
 import sg.bigo.common.utils.BigoEngineConfig
 import sg.bigo.opensdk.api.IAVEngine
 import sg.bigo.opensdk.api.IAVEngineCallback
+import sg.bigo.opensdk.rtm.TestEnv
 
 class LiveApplication : Application() {
 
     companion object {
+
         private var sInstance: IAVEngine? = null
 
         val config: BigoEngineConfig by lazy {
@@ -18,10 +19,45 @@ class LiveApplication : Application() {
 
         var appContext: Context? = null
 
+        val  appId : String by lazy {
+            config.appId
+        }
+
+        val cert : String by lazy {
+            config.cert
+        }
+
+        val needCustomUpsideDown : Int by lazy {
+            config.isEnableCustomCaptureUpsideDown
+        }
+
+        val needCustomMirror : Boolean by lazy {
+            config.isEnableCustomCaptureMirror
+        }
+
         fun avEngine(): IAVEngine {
             if(sInstance == null) {
-                sInstance = IAVEngine.create(appContext, appContext!!.getString(R.string.bigo_app_id), object : IAVEngineCallback() {})
-                sInstance!!.enableDebug(false)
+                sInstance = IAVEngine.create(appContext, appId, null, object : IAVEngineCallback() {}, object : TestEnv {
+                    override fun isTestMode(): Boolean {
+                        return config.isCustomEnvEnabled
+                    }
+
+                    override fun isTestEnv(): Boolean {
+                        return config.isTestEnv
+                    }
+
+                    override fun getTestLbsIp(): String {
+                        return config.lbsIp
+                    }
+
+                    override fun getTestLbsPort(): Int {
+                        return config.lbsPort
+                    }
+                })
+
+                //接入方无需自定义环境，可以直接使用如下方式创建IAVEngine实例
+                //sInstance = IAVEngine.create(appContext, appId, object :IAVEngineCallback() {})
+                sInstance!!.enableDebug(true)
             }
             return sInstance!!
         }

@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -34,6 +35,28 @@
         <activity android:name="sg.bigo.common.BeautifyActivity"
             android:theme="@style/myTransparent"
             />
+        <activity android:name="sg.bigo.common.TranscodingCfgActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="sg.bigo.common.BigoImageEditActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.DebugToolCfgActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.TranscodingListEditActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name="sg.bigo.common.TranscodingUserEditActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.SoundEffectSettingActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity android:name="sg.bigo.common.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

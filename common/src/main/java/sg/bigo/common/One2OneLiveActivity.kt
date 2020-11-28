@@ -2,11 +2,14 @@ package sg.bigo.common
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_1v1_live2.*
 import sg.bigo.common.annotation.NonNull
+import sg.bigo.common.utils.ScreenUtil
 import sg.bigo.common.utils.ToastUtils
 import sg.bigo.opensdk.api.AVEngineConstant
 import sg.bigo.opensdk.api.IAVEngine
@@ -14,7 +17,7 @@ import sg.bigo.opensdk.api.IAVEngineCallback
 import sg.bigo.opensdk.api.IDeveloperMock
 import sg.bigo.opensdk.api.callback.JoinChannelCallback
 import sg.bigo.opensdk.api.callback.OnUserInfoNotifyCallback
-import sg.bigo.opensdk.api.impl.JoinChannelCallbackParams
+import sg.bigo.opensdk.api.impl.ChannelInfo
 import sg.bigo.opensdk.api.struct.ChannelMicUser
 import sg.bigo.opensdk.api.struct.UserInfo
 import sg.bigo.opensdk.api.struct.VideoCanvas
@@ -113,7 +116,7 @@ open class One2OneLiveActivity : BaseActivity() {
             leaveChannel()
         }
         mAVEngine.addCallback(mLiveCallback)
-        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.CHANNEL_PROFILE_COMMUNICATION)
+        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.COMMUNICATION)
         mRole = intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_BROADCAST)
     }
 
@@ -152,8 +155,16 @@ open class One2OneLiveActivity : BaseActivity() {
             startActivity(Intent(this,BeautifyActivity::class.java))
         }
 
+        btn_stickers.setOnClickListener {
+            startActivity(Intent(this,StickersActivity::class.java))
+        }
+
         btn_prew_beauty.setOnClickListener {
             startActivity(Intent(this,BeautifyActivity::class.java))
+        }
+        
+        btn_prew_stickers.setOnClickListener {
+            startActivity(Intent(this,StickersActivity::class.java))
         }
 
         canvas_big.post {
@@ -173,11 +184,78 @@ open class One2OneLiveActivity : BaseActivity() {
             }
         }
 
+        initDragView()
+
         showPreviewMode()
     }
 
+
+
+    private var screenWidth = ScreenUtil.getScreenWidth(LiveApplication.appContext)
+    private var screenHeight = ScreenUtil.getScreenHeight(LiveApplication.appContext)
+    private var downX = 0f
+    private var downY = 0f
+    var isDrag = false
+        private set
+
+    private fun initDragView() {
+        canvas_small.setOnTouchListener(object :View.OnTouchListener{
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                if (canvas_small.isEnabled) {
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            isDrag = false
+                            downX = event.x
+                            downY = event.y
+                            Log.e("kid", "ACTION_DOWN ${downX} ${downY}")
+                        }
+                        MotionEvent.ACTION_MOVE -> {
+                            val xDistance = event.x - downX
+                            val yDistance = event.y - downY
+                            var l: Int
+                            var r: Int
+                            var t: Int
+                            var b: Int
+                            //当水平或者垂直滑动距离大于10,才算拖动事件
+                            if (Math.abs(xDistance) > 10 || Math.abs(yDistance) > 10) {
+                                isDrag = true
+                                l = (v.left + xDistance).toInt()
+                                r = l + v.width
+                                t = (v.top + yDistance).toInt()
+                                b = t + v.height
+                                //不划出边界判断,此处应按照项目实际情况,因为本项目需求移动的位置是手机全屏,
+                                // 所以才能这么写,如果是固定区域,要得到父控件的宽高位置后再做处理
+                                if (l < 0) {
+                                    l = 0
+                                    r = l + v.width
+                                } else if (r > screenWidth) {
+                                    r = screenWidth
+                                    l = r - v.height
+                                }
+                                if (t < 0) {
+                                    t = 0
+                                    b = t + v.width
+                                } else if (b > screenHeight) {
+                                    b = screenHeight
+                                    t = b - v.height
+                                }
+                                canvas_small.layoutParams = (canvas_small.layoutParams as FrameLayout.LayoutParams).apply {
+                                    setMargins(0,t,screenWidth - r,0)
+                                }
+                            }
+                        }
+                        MotionEvent.ACTION_UP -> v.isPressed = false
+                        MotionEvent.ACTION_CANCEL -> v.isPressed = false
+                    }
+                    return true
+                }
+                return false
+            }
+        })
+    }
+
     private fun joinRoom() {
-        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.CHANNEL_PROFILE_COMMUNICATION)
+        mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.COMMUNICATION)
         mAVEngine.attachRendererView(bigoRendererView)
 
         start_call.setOnClickListener {
@@ -185,15 +263,15 @@ open class One2OneLiveActivity : BaseActivity() {
                 override fun onNotifyUserInfo(user: UserInfo?) {
                     user?.let {
                         mMyUid = user.uid
-                        mAVEngine.developerMock.getToken(mMyUid, mChannelName, mUserName, getString(R.string.bigo_cert), object : IDeveloperMock.CommonCallback<String> {
+                        mAVEngine.developerMock.getToken(mMyUid, mChannelName, mUserName, LiveApplication.cert, TokenCallbackProxy(object : IDeveloperMock.CommonCallback<String?> {
                             override fun onResult(token: String?) {
-                                mAVEngine.joinChannel(token, mChannelName, mMyUid, mJoinChannelCallback)
+                                mAVEngine.joinChannel(token, mChannelName, mMyUid, LiveApplication.config.liveExtraInfo, mJoinChannelCallback)
                             }
 
                             override fun onError(reason: Int) {
                                 println("$TAG getToken error $reason")
                             }
-                        })
+                        }))
                     } ?: let {
                         ToastUtils.show("换取媒体uid失败")
                     }
@@ -208,12 +286,12 @@ open class One2OneLiveActivity : BaseActivity() {
     }
 
     private val mJoinChannelCallback = object : JoinChannelCallback {
-        override fun onSuccess(params: JoinChannelCallbackParams?) {
+        override fun onSuccess(params: ChannelInfo?) {
             mMyUid = params!!.uid
         }
 
         override fun onFailed(reason: Int) {
-            Toast.makeText(this@One2OneLiveActivity, getString(R.string.tips_enter_room_failed), Toast.LENGTH_LONG).show()
+            ToastUtils.showJoinChannelErrTips(reason)
             this@One2OneLiveActivity.finish()
         }
 
@@ -240,6 +318,7 @@ open class One2OneLiveActivity : BaseActivity() {
                     if (isBroadcaster(mRole)) {
                         if(micUserMap.isNotEmpty()) {
                             mAVEngine.setupLocalVideo(VideoCanvas(mMyUid, canvas_small))
+                            mAVEngine.setupRemoteVideo(VideoCanvas(remoteUid,canvas_big))
                         } else {
                             mAVEngine.setupLocalVideo(VideoCanvas(mMyUid, canvas_big))
                         }
@@ -254,6 +333,7 @@ open class One2OneLiveActivity : BaseActivity() {
         override fun onUserJoined(@NonNull user: ChannelMicUser, elapsed: Int) {
             println("#onUserJoined $user")
             runOnUiThread {
+                if(remoteUid > 0) return@runOnUiThread
                 if(micUserMap.size >= 2 || micUserMap.containsKey(user.uid)) return@runOnUiThread
                 println("#onUserJoined2 $user")
                 if(micUserMap.containsKey(mMyUid)) {
@@ -290,7 +370,7 @@ open class One2OneLiveActivity : BaseActivity() {
             println("$TAG sth error $err")
         }
 
-        override fun onKicked(reason: Int) {
+        override fun onKicked() {
             ToastUtils.show(getString(R.string.tips_be_kicked_suggest))
             this@One2OneLiveActivity.finish()
         }
@@ -313,6 +393,7 @@ open class One2OneLiveActivity : BaseActivity() {
 
     private fun leaveChannel() {
         clearAllBeautyConfig()
+        remoteUid = 0
         mAVEngine.removeCallback(mLiveCallback)
         mAVEngine.leaveChannel()
     }

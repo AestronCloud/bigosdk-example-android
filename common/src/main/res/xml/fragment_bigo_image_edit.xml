@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/tips_bigo_image_setting">
+        <EditTextPreference
+            android:dialogTitle="设置url"
+            android:key="bigo_image_url"
+            android:title="url"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置X"
+            android:key="bigo_image_x"
+            android:title="X"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Y"
+            android:key="bigo_image_y"
+            android:title="Y"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Width"
+            android:key="bigo_image_width"
+            android:title="Width"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Height"
+            android:key="bigo_image_height"
+            android:title="Height"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>

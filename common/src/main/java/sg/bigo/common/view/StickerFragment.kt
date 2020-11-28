@@ -142,6 +142,10 @@ class StickerFragment : BeautifyFragment() {
                     selectPos = position
                     if(!sticker.isNone()) {
                         LiveApplication.avEngine().setSticker(sticker.getUnzipedFileDir())
+
+                        LiveApplication.avEngine().setMediaSideFlags(true,false,0)
+                        LiveApplication.avEngine().sendMediaSideInfo("click sticker,SendSeiInVideo.")
+
                     } else {
                         LiveApplication.avEngine().setSticker(null)
                     }

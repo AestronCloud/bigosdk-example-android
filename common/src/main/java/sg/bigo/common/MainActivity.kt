@@ -18,6 +18,7 @@ class MainActivity : BaseActivity() {
             LiveNameInputActivity.go(this,etUsername.text.toString())
         }
 
+        tips_version.text = getString(R.string.tips_powered,LiveApplication.avEngine().sdkVersion)
         PremissionProcesser.checkSelfPermissions(this)
     }
 

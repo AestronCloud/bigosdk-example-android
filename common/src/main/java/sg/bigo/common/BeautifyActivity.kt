@@ -16,6 +16,7 @@ class BeautifyActivity : BottomActivity() {
     private val titles = mutableListOf<String>()
     private lateinit var filterFragment:FilterFragment
     private lateinit var skinBeautyFragment:SkinBeautyFragment
+    private lateinit var shapeFaceFragment:ShapeFaceFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class BeautifyActivity : BottomActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if(fromUser) {
                     filterFragment.onSeekProgress(progress)
+                    shapeFaceFragment.onSeekProgress(progress)
                     skinBeautyFragment.onSeekProgress(progress)
                 }
 
@@ -46,10 +48,12 @@ class BeautifyActivity : BottomActivity() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     filterFragment.disable()
+                    shapeFaceFragment.disable()
                     skinBeautyFragment.disable()
                 }
                 MotionEvent.ACTION_UP,MotionEvent.ACTION_CANCEL -> {
                     filterFragment.enable()
+                    shapeFaceFragment.enable()
                     skinBeautyFragment.enable()
                 }
                 else -> {}
@@ -59,9 +63,11 @@ class BeautifyActivity : BottomActivity() {
 
         filterFragment = FilterFragment()
         skinBeautyFragment = SkinBeautyFragment()
+        shapeFaceFragment = ShapeFaceFragment()
 
         list.add(filterFragment)
         list.add(skinBeautyFragment)
+        list.add(shapeFaceFragment)
 
         titles.add("滤镜")
         titles.add("美肤")

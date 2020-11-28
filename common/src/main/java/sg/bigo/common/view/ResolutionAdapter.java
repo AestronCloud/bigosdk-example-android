@@ -26,11 +26,10 @@ public class ResolutionAdapter extends RecyclerView.Adapter {
     }
 
     protected void initData(Context context) {
-        int size = 6;
         String[] labels = context.getResources().
                 getStringArray(R.array.string_array_resolutions);
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < labels.length; i++) {
             ResolutionItem item = new ResolutionItem(labels[i],0);
             mItems.add(item);
         }
@@ -82,7 +81,6 @@ public class ResolutionAdapter extends RecyclerView.Adapter {
 
     public static class ResolutionItem {
         String label;
-//        VideoEncoderConfiguration.VideoDimensions dimension;
 
         ResolutionItem(String label, int dimension) {
             this.label = label;

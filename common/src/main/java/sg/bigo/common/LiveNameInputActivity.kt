@@ -27,7 +27,7 @@ open class LiveNameInputActivity : BaseActivity() {
             AppType.basicbeauty -> mutableListOf(btnbasicbeauty)
             AppType.one2onevideo -> mutableListOf(btn1v1Live)
             AppType.one2onevoice -> mutableListOf(btn1v1Voice)
-            AppType.multilive -> mutableListOf(btnMultiLive)
+            AppType.multilive -> mutableListOf(btnMultiLive,btn_pk)
             AppType.multivoice -> mutableListOf(btnSixVoice)
             AppType.sixseatvideolive -> mutableListOf(btnSixVideo)
             AppType.basicbeauty1v1video -> mutableListOf(btnbasicbeauty1v1)
@@ -69,7 +69,7 @@ open class LiveNameInputActivity : BaseActivity() {
 
         tvUserName.text = getString(R.string.tips_current_user) + userName
 
-        ViewHelper.mutuallyExclusiveEnableView(etLiveName, arrayListOf(btnMultiLive,btn1v1Live,btn1v1Voice,btnSixVoice,btnSixVideo))
+        ViewHelper.mutuallyExclusiveEnableView(etLiveName, arrayListOf(btnMultiLive,btn1v1Live,btn1v1Voice,btnSixVoice,btnSixVideo,btnbasicbeauty1v1,btnbasicbeauty))
         etLiveName.requestFocus()
 
         fun toChooseRole(chooseRoleListener: IChooseRoleListener) {
@@ -155,9 +155,21 @@ open class LiveNameInputActivity : BaseActivity() {
             })
         }
 
+        btn_pk.setOnClickListener {
+            toChooseRole(object :IChooseRoleListener{
+                override fun onChose(role: Int) {
+                    val intent = Intent(this@LiveNameInputActivity,LivePKActivity::class.java)
+                    intent.putExtra(KEY_USER_NAME,userName)
+                    intent.putExtra(KEY_CHANNEL_NAME,etLiveName.text.toString())
+                    intent.putExtra(KEY_CLIENT_ROLE,role)
+                    startActivity(intent)
+                }
+            })
+        }
+
 
         go_settings.setOnClickListener {
-            SettingsActivity.go(this)
+            startActivity(Intent(this,DebugToolCfgActivity::class.java))
         }
 
 

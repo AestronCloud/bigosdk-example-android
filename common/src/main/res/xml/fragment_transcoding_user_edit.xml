@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/tips_transcoding_user">
+        <EditTextPreference
+            android:dialogTitle="设置uid"
+            android:key="key_tue_uid"
+            android:title="uid"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置X"
+            android:key="key_tue_x"
+            android:title="X"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Y"
+            android:key="key_tue_y"
+            android:title="Y"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Width"
+            android:key="key_tue_width"
+            android:title="Width"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Height"
+            android:key="key_tue_height"
+            android:title="Height"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置zOrder"
+            android:key="key_tue_zorder"
+            android:title="zOrder"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Alpha"
+            android:key="key_tue_alpha"
+            android:title="Alpha"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:dialogTitle="设置Audio Channel"
+            android:key="key_tue_audio_channel"
+            android:title="Audio Channel"
+            android:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
