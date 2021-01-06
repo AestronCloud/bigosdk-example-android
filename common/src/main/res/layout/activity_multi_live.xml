@@ -259,6 +259,18 @@
                     android:layout_marginLeft="@dimen/live_bottom_btn_margin"
                     android:src="@drawable/ic_baseline_queue_music_24"
                     />
+
+                <ImageView
+                    android:id="@+id/live_audio_change"
+                    android:layout_width="@dimen/live_bottom_btn_size"
+                    android:layout_height="@dimen/live_bottom_btn_size"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/rounded_bg_full_transparent"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/live_bottom_btn_margin"
+                    android:layout_marginLeft="@dimen/live_bottom_btn_margin"
+                    android:src="@drawable/ic_sound_change_24"
+                    />
             </LinearLayout>
 
 

@@ -125,6 +125,17 @@
     <string name="debug_cfg_open_multi_view_mode">打开多view模式</string>
     <string name="tips_stop_live_transcoding">触发合流</string>
     <string name="key_debug_cfg_auto_publish_and_livetrancoding">进房自动旁路转推自动合流url配置</string>
+    <string name="tips_title_change_sound">play change sound</string>
+    <string name="tips_start_play_change">start play change</string>
+    <string name="tips_pause_play_change">stop play change</string>
+    <string name="tips_choose_sound_type">type of sound：</string>
+    <string name="tips_choose_reverberation_type">type of reverberation：</string>
+    <string name="tips_choose_equalizer_type">type of equalizer：</string>
+    <string name="tips_pitch">Pitch Seekbar</string>
+    <string name="tips_sound_change">choice of sound change/reverb</string>
+    <string name="debug_cfg_channel_cc">配置频道国家码</string>
+    <string name="debug_cfg_enable_custom_appid_cert">是否启用自定义appid、Cert</string>
+
 
     <array name="time_zone">
         <item>GMT - 00:00</item>

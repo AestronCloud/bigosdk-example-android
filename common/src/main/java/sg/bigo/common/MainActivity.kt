@@ -14,7 +14,9 @@ class MainActivity : BaseActivity() {
 
         ViewHelper.mutuallyExclusiveEnableView(etUsername, arrayListOf(btnGo))
         etUsername.requestFocus()
+        etUsername.setText(LiveApplication.config.userAccount)
         btnGo.setOnClickListener {
+            LiveApplication.config.userAccount = etUsername.text.toString()
             LiveNameInputActivity.go(this,etUsername.text.toString())
         }
 

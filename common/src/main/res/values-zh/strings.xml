@@ -92,5 +92,15 @@
     <string name="debug_cfg_open_multi_view_mode">打开多view模式</string>
     <string name="tips_stop_live_transcoding">触发合流</string>
     <string name="key_debug_cfg_auto_publish_and_livetrancoding">进房自动旁路转推自动合流url配置</string>
+    <string name="tips_title_change_sound">变声播放</string>
+    <string name="tips_start_play_change">开始变声</string>
+    <string name="tips_pause_play_change">停止变声</string>
+    <string name="tips_choose_sound_type">声音类型：</string>
+    <string name="tips_choose_reverberation_type">混响类型：</string>
+    <string name="tips_choose_equalizer_type">均衡器类型：</string>
+    <string name="tips_pitch">音调拖动条</string>
+    <string name="tips_sound_change">变声/混响选项</string>
+    <string name="debug_cfg_channel_cc">配置频道国家码</string>
+    <string name="debug_cfg_enable_custom_appid_cert">是否启用自定义appid、Cert</string>
 
 </resources>

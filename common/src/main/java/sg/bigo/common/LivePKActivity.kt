@@ -328,11 +328,6 @@ class LivePKActivity : BaseActivity() {
             }
         }
 
-        override fun onVideoConfigResolutionTypeChanged() {
-            mAVEngine.stopPreview();
-            mAVEngine.startPreview();
-        }
-
         override fun onRtmpStreamingStateChanged(url: String?, state: KMediaRtmpStreamState?, errCode: KMediaRtmpStreamErrCode?) {
             val tips = when {
                 KMediaRtmpStreamErrCode.OK == errCode -> {

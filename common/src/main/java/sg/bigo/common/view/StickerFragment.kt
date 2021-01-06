@@ -23,6 +23,8 @@ import sg.bigo.common.data.StickerInfo
 import sg.bigo.common.data.StickerUtils
 import sg.bigo.common.utils.Decompress
 import java.io.File
+import java.nio.ByteBuffer
+import java.util.*
 
 class StickerFragment : BeautifyFragment() {
 
@@ -140,11 +142,16 @@ class StickerFragment : BeautifyFragment() {
 
                 root.iv_sticker_icon.setOnClickListener {
                     selectPos = position
-                    if(!sticker.isNone()) {
+                    if (!sticker.isNone()) {
                         LiveApplication.avEngine().setSticker(sticker.getUnzipedFileDir())
 
-                        LiveApplication.avEngine().setMediaSideFlags(true,false,0)
-                        LiveApplication.avEngine().sendMediaSideInfo("click sticker,SendSeiInVideo.")
+                        LiveApplication.avEngine().setMediaSideFlags(true, false, 0)
+                        val test_uuid = byteArrayOf(0x3c.toByte(), 0x13.toByte(), 0x1e.toByte(), 0x19.toByte(), 0x16.toByte(), 0x18.toByte(), 0x49.toByte(), 0x1c.toByte(), 0x1a.toByte(), 0x33.toByte(), 0x15.toByte(), 0x1e.toByte(), 0x1f.toByte(), 0x12.toByte(), 0x53.toByte(), 0x4d.toByte())
+                        val uuidStr = String(test_uuid)
+                        var testSeiData = "click sticker,SendSeiInVideo."
+                        testSeiData = uuidStr + testSeiData
+                        val SeiData = ByteBuffer.wrap(testSeiData.toByteArray())
+                        LiveApplication.avEngine().sendMediaSideInfo(SeiData)
 
                     } else {
                         LiveApplication.avEngine().setSticker(null)

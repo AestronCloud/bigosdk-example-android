@@ -69,8 +69,11 @@ open class LiveNameInputActivity : BaseActivity() {
 
         tvUserName.text = getString(R.string.tips_current_user) + userName
 
+        etLiveName.setText(LiveApplication.config.channelName)
         ViewHelper.mutuallyExclusiveEnableView(etLiveName, arrayListOf(btnMultiLive,btn1v1Live,btn1v1Voice,btnSixVoice,btnSixVideo,btnbasicbeauty1v1,btnbasicbeauty))
         etLiveName.requestFocus()
+
+
 
         fun toChooseRole(chooseRoleListener: IChooseRoleListener) {
             val dialogBuilder = AlertDialog.Builder(this)
@@ -178,6 +181,10 @@ open class LiveNameInputActivity : BaseActivity() {
         PremissionProcesser.checkSelfPermissions(this)
     }
 
+    override fun startActivityForResult(intent: Intent?, requestCode: Int) {
+        LiveApplication.config.channelName = etLiveName.text.toString()
+        super.startActivityForResult(intent, requestCode)
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

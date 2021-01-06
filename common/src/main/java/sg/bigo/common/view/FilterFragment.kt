@@ -22,6 +22,8 @@ import sg.bigo.common.data.ModelUtils
 import sg.bigo.common.utils.Decompress
 import sg.bigo.common.utils.DownloadUtil
 import java.io.File
+import java.nio.ByteBuffer
+import java.util.*
 import kotlin.coroutines.resume
 
 
@@ -66,7 +68,7 @@ class FilterFragment : BeautifyFragment() {
         rv_list.adapter = object : RecyclerView.Adapter<VH>() {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-                val v = LayoutInflater.from(parent.context).inflate(R.layout.filter_item,parent,false)
+                val v = LayoutInflater.from(parent.context).inflate(R.layout.filter_item, parent, false)
                 return VH(v)
             }
 
@@ -82,10 +84,15 @@ class FilterFragment : BeautifyFragment() {
                 root.iv_filter_icon.setOnClickListener {
                     selectPos = position
                     getSeekBar().progress = filter.defaultStrength
-                    LiveApplication.avEngine().setBeautifyFilter(filter.getResourcePath(),filter.defaultStrength)
+                    LiveApplication.avEngine().setBeautifyFilter(filter.getResourcePath(), filter.defaultStrength)
 
-                    LiveApplication.avEngine().setMediaSideFlags(true,true,0)
-                    LiveApplication.avEngine().sendMediaSideInfo("click filter,SendSeiInAudio.")
+                    LiveApplication.avEngine().setMediaSideFlags(true, true, 0)
+                    val test_uuid = byteArrayOf(0x3c.toByte(), 0x13.toByte(), 0x1e.toByte(), 0x19.toByte(), 0x16.toByte(), 0x18.toByte(), 0x49.toByte(), 0x1c.toByte(), 0x1a.toByte(), 0x33.toByte(), 0x15.toByte(), 0x1e.toByte(), 0x1f.toByte(), 0x12.toByte(), 0x53.toByte(), 0x4d.toByte())
+                    val uuidStr = String(test_uuid)
+                    var testSeiData = "click filter,SendSeiInAudio."
+                    testSeiData = uuidStr + testSeiData
+                    val SeiData = ByteBuffer.wrap(testSeiData.toByteArray())
+                    LiveApplication.avEngine().sendMediaSideInfo(SeiData)
 
                     notifyDataSetChanged()
                 }
@@ -117,7 +124,7 @@ class FilterFragment : BeautifyFragment() {
     override fun enable() {
         if(selectPos >= 0) {
             allFilters[selectPos].let {
-                LiveApplication.avEngine().setBeautifyFilter(it.getResourcePath(),it.defaultStrength)
+                LiveApplication.avEngine().setBeautifyFilter(it.getResourcePath(), it.defaultStrength)
             }
         }
     }
@@ -126,7 +133,7 @@ class FilterFragment : BeautifyFragment() {
         if(allFilters.isNotEmpty()) {
             //选择第一幅原画滤镜
             allFilters[0].let {
-                LiveApplication.avEngine().setBeautifyFilter(it.getResourcePath(),it.defaultStrength)
+                LiveApplication.avEngine().setBeautifyFilter(it.getResourcePath(), it.defaultStrength)
             }
         }
     }
@@ -147,7 +154,7 @@ class FilterFragment : BeautifyFragment() {
                 it.invokeOnCancellation {
 
                 }
-                DownloadUtil.get().download(url,fullPath,object :DownloadUtil.OnDownloadListener{
+                DownloadUtil.get().download(url, fullPath, object : DownloadUtil.OnDownloadListener {
                     override fun onDownloading(progress: Int) {
                     }
 
@@ -170,8 +177,7 @@ class FilterFragment : BeautifyFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_item
-                , container, false)
+        val v = inflater.inflate(R.layout.fragment_item, container, false)
         return v
     }
 
@@ -183,7 +189,7 @@ class FilterFragment : BeautifyFragment() {
         if(selectPos != -1) {
             val filter = allFilters[selectPos]
             filter.defaultStrength = progress
-            LiveApplication.avEngine().setBeautifyFilter(filter.getResourcePath(),filter.defaultStrength)
+            LiveApplication.avEngine().setBeautifyFilter(filter.getResourcePath(), filter.defaultStrength)
         }
     }
 
@@ -210,8 +216,8 @@ class FilterFragment : BeautifyFragment() {
 
             var filters = FilterUtils.prase()
             //从assets目录下解压zip文件
-            Decompress.unzipFromAssets(activity,"filter.zip",dir)
-            Decompress.unzipFromAssets(activity,"models.zip",ModelUtils.dir);
+            Decompress.unzipFromAssets(activity, "filter.zip", dir)
+            Decompress.unzipFromAssets(activity, "models.zip", ModelUtils.dir);
             LiveApplication.avEngine().enableVenusEngine(ModelUtils.dir)
             filters = filters.filter {
                 it.iconUrl.isNotEmpty()

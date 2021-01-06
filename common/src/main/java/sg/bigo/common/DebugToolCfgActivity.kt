@@ -9,6 +9,7 @@ import androidx.preference.Preference.OnPreferenceClickListener
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import sg.bigo.common.utils.BigoEngineConfig.*
+import sg.bigo.opensdk.utils.Log
 
 class DebugToolCfgActivity: BaseActivity() {
 
@@ -25,6 +26,7 @@ class DebugToolCfgActivity: BaseActivity() {
 
 
     class DebugToolCfgFragment : PreferenceFragmentCompat() {
+        private val TAG = "DebugToolCfgActivity"
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -35,6 +37,20 @@ class DebugToolCfgActivity: BaseActivity() {
             setShouldRestartListener(key_debug_cfg_is_test_env)
             setShouldRestartListener(key_debug_cfg_appid)
             setShouldRestartListener(key_debug_cfg_cert)
+
+            if(BuildConfig.HIDE_CUSTOM_ENV) {
+                hidePrefs(getString(sg.bigo.common.R.string.custom_env))
+            }
+        }
+
+        private fun hidePrefs(key: String) {
+            val prefs = findPreference(key) as Preference?;
+            prefs?.let {
+                preferenceScreen.removePreference(prefs);
+            } ?: let {
+                Log.w(TAG,"can not find key ${key}, may pass a wrong key")
+            }
+
         }
 
         private fun setShouldRestartListener(key: String) {

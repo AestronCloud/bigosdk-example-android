@@ -1,6 +1,7 @@
 package sg.bigo.common
 
 import android.content.Intent
+import android.net.Uri
 import android.opengl.GLSurfaceView
 import android.os.Build
 import android.os.Bundle
@@ -38,11 +39,21 @@ private const val TAG = "MultiLiveActivity"
 
 open class MultiLiveActivity : BaseActivity() {
     private val mUserName by lazy {
-        intent.getStringExtra(KEY_USER_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("userName")
+        } else {
+            intent.getStringExtra(KEY_USER_NAME)
+        }
     }
 
     private val mChannelName: String by lazy {
-        intent.getStringExtra(KEY_CHANNEL_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("channelName")
+        } else {
+            intent.getStringExtra(KEY_CHANNEL_NAME)
+        }
     }
 
     private val isCustomCapture
@@ -70,6 +81,7 @@ open class MultiLiveActivity : BaseActivity() {
         live_transcoding_start.visibility = View.VISIBLE
         live_transcoding_cfg.visibility = View.VISIBLE
         live_audio_op.visibility = View.VISIBLE
+        live_audio_change.visibility = View.VISIBLE
         live_remove_publish_stream_url.visibility = View.VISIBLE
         live_add_publish_stream_url.visibility = View.VISIBLE
 
@@ -101,6 +113,7 @@ open class MultiLiveActivity : BaseActivity() {
         live_transcoding_start.visibility = View.GONE
         live_transcoding_cfg.visibility = View.GONE
         live_audio_op.visibility = View.GONE
+        live_audio_change.visibility = View.GONE
         live_remove_publish_stream_url.visibility = View.GONE
         live_add_publish_stream_url.visibility = View.GONE
 
@@ -188,7 +201,14 @@ open class MultiLiveActivity : BaseActivity() {
 
         mAVEngine.enableCustomVideoCapture(isCustomCapture)
         mAVEngine.addCallback(mLiveCallback)
-        mRole = intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+
+        mRole = if (Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("role").toInt()
+        } else {
+            intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+        }
+
         isPrivateRoom = false
     }
 
@@ -330,6 +350,10 @@ open class MultiLiveActivity : BaseActivity() {
             startActivity(Intent(this,SoundEffectSettingActivity::class.java))
         }
 
+        live_audio_change.setOnClickListener{
+            startActivity(Intent(this,SoundChangeActivity::class.java))
+        }
+
         if(!isCustomCapture) {
             aux_view.visibility = View.GONE
         }
@@ -349,7 +373,7 @@ open class MultiLiveActivity : BaseActivity() {
     private fun joinRoom() {
         mAVEngine.setClientRole(mRole)
         mAVEngine.enableLocalAudio(false);
-
+        mAVEngine.setAudioProfile(LiveApplication.config.profile, LiveApplication.config.scenario)
 
         if(isEnableMultiView) {
             if(isBroadcaster(mRole)) {
@@ -366,6 +390,10 @@ open class MultiLiveActivity : BaseActivity() {
         LiveApplication.config.run {
             Log.e(TAG, "joinRoomjoinRoom: ${lbsIp} ${lbsPort} ${appId} ${cert} ${liveExtraInfo} ${frameRate}")
         }
+
+        mAVEngine.setAppConfig(AppConfig().apply {
+            mChannelCountryCode = LiveApplication.config.channelCC
+        })
 
         Log.d(TAG, "joinRoom() called maxResolution ${LiveApplication.config.maxResolution} frameRate ${LiveApplication.config.frameRate}")
         mAVEngine.registerLocalUserAccount(mUserName,object :OnUserInfoNotifyCallback{
@@ -411,7 +439,6 @@ open class MultiLiveActivity : BaseActivity() {
             mAVEngine.setBigoMediaSideCallback(mseiCallback)
 
             if(autoPublishUrl.isNotEmpty()) {
-                mAVEngine.addPublishStreamUrl(autoPublishUrl)
                 mAVEngine.setLiveTranscoding(LiveTranscoding().apply {
                     width = 720
                     height = 1280
@@ -593,6 +620,13 @@ open class MultiLiveActivity : BaseActivity() {
 
         }
 
+
+        override fun onTranscodingUpdated() {
+            if(autoPublishUrl.isNotEmpty() && !rtmpUrls.contains(autoPublishUrl)) {
+                mAVEngine.addPublishStreamUrl(autoPublishUrl)
+            }
+        }
+
         override fun onRtmpStreamingStateChanged(url: String?, state: KMediaRtmpStreamState?, errCode: KMediaRtmpStreamErrCode?) {
             val tips = when {
                 KMediaRtmpStreamErrCode.OK == errCode -> {
@@ -646,15 +680,6 @@ open class MultiLiveActivity : BaseActivity() {
 
         override fun onError(err: Int) {
             log(TAG," sth error $err")
-        }
-
-        override fun onVideoConfigResolutionTypeChanged() {
-            if(!isCustomCapture) {
-                if(isBroadcaster(mRole)) {
-                    mAVEngine.stopPreview()
-                    mAVEngine.startPreview()
-                }
-            }
         }
 
         override fun onKicked() {

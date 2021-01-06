@@ -66,10 +66,8 @@ class One2OneVoiceActivity : BaseActivity() {
     private fun initView() {
         live_btn_mute_audio.isActivated = true
         live_btn_mute_audio.setOnClickListener { view ->
-            remoteUser?.let {
-                mAVEngine.muteLocalAudioStream(view.isActivated)
-                view.isActivated = !view.isActivated
-            }
+            mAVEngine.muteLocalAudioStream(view.isActivated)
+            live_btn_mute_audio.isActivated = !live_btn_mute_audio.isActivated
         }
 
         live_btn_endcall.setOnClickListener {

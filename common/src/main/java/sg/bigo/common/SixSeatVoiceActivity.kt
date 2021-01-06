@@ -2,6 +2,7 @@ package sg.bigo.common
 
 import android.content.Intent
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,7 +29,6 @@ import sg.bigo.opensdk.api.struct.ChannelMicUser
 import sg.bigo.opensdk.api.struct.UserInfo
 import kotlin.properties.Delegates
 import sg.bigo.common.view.SoundEffectFragment
-
 class SixSeatVoiceActivity : BaseActivity() {
     private val mIAVEngine = avEngine()
 
@@ -70,14 +70,24 @@ class SixSeatVoiceActivity : BaseActivity() {
     }
 
     private val mUserName by lazy {
-        intent.getStringExtra(KEY_USER_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("userName")
+        } else {
+            intent.getStringExtra(KEY_USER_NAME)
+        }
     }
 
     private val mChannelName: String by lazy {
-        intent.getStringExtra(KEY_CHANNEL_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("channelName")
+        } else {
+            intent.getStringExtra(KEY_CHANNEL_NAME)
+        }
     }
 
-    val mics = arrayListOf(MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo())
+    val mics = arrayListOf(MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,6 +150,10 @@ class SixSeatVoiceActivity : BaseActivity() {
             startActivity(Intent(this,SoundEffectSettingActivity::class.java))
         }
 
+        btn_live_audio_change.setOnClickListener {
+            startActivity(Intent(this,SoundChangeActivity::class.java))
+        }
+
 
         live_audio_quality_switch.isActivated = false
         live_audio_quality_switch.setOnClickListener {
@@ -150,9 +164,9 @@ class SixSeatVoiceActivity : BaseActivity() {
             }
         }
 
-        mic_list.layoutManager = GridLayoutManager(this, 3)
+        mic_list.layoutManager = GridLayoutManager(this, 4)
 
-        val itemW = WindowUtil.w / 3
+        val itemW = WindowUtil.w / 4
         mic_list.adapter = object : RecyclerView.Adapter<VH>() {
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -235,13 +249,20 @@ class SixSeatVoiceActivity : BaseActivity() {
         if(isRestart) {
             leaveRoom()
         }
-        mRole = intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+
+        mRole = if (Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("role").toInt()
+        } else {
+            intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+        }
         mIAVEngine.addCallback(mVoiceLiveCallback)
     }
 
     private fun startVoiceLive() {
         mIAVEngine.enableLocalVideo(false)
         mIAVEngine.setClientRole(mRole)
+        mIAVEngine.setAudioProfile(LiveApplication.config.profile, AVEngineConstant.AudioScenarioType.AUDIO_SCENARIO_CHATROOM_ENTERTAINMENT)
         mIAVEngine.registerLocalUserAccount(mUserName,object :OnUserInfoNotifyCallback {
             override fun onNotifyUserInfo(user: UserInfo?) {
                 user?.let {

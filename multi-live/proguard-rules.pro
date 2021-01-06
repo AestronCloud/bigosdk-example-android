@@ -20,22 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-#base rules from android proguard.cfg
-#-dontusemixedcaseclassnames
-#-dontskipnonpubliclibraryclasses
-#-verbose
-#-optimizationpasses 2
-#-dontskipnonpubliclibraryclassmembers
-#-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
-#-ignorewarnings
-#-keepattributes Exceptions
-#-keepattributes InnerClasses
-#-keepattributes *Annotation*
-#-keepattributes JavascriptInterface
-#-keepattributes Signature
-#-keepattributes RuntimeVisibleAnnotations
-#-keepattributes SourceFile
-#-keepattributes LineNumberTable
 
 #native
 -keepclasseswithmembers class * {
@@ -108,4 +92,13 @@
 -keep class com.polly.mobile.audio.codec.SilkFileDecoder {
     <fields>;
     <methods>;
+}
+
+
+-keep class com.polly.mobile.mediasdk.** {
+    *;
+}
+
+-keep class com.polly.mobile.videosdk.** {
+    *;
 }

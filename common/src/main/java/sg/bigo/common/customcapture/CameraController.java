@@ -315,6 +315,7 @@ public class CameraController implements SurfaceTexture.OnFrameAvailableListener
             GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
 
 
+            stopCamera();
             startCamera();
 
             previewEglBase.detachCurrent();
@@ -340,7 +341,11 @@ public class CameraController implements SurfaceTexture.OnFrameAvailableListener
     }
 
     public void stopCamera() {
-        mCamera.stopPreview();
+        if (mCamera != null) {
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+        }
     }
 
     private  int mBitmapTextureId = 0;
@@ -382,7 +387,7 @@ public class CameraController implements SurfaceTexture.OnFrameAvailableListener
 
             GlUtil.rotateTextureMatrix(mTexMtx, mDisplayOrientation);
             mRenderScreen.draw(mTexMtx);
-//            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+            GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
             LiveApplication.Companion.avEngine().sendCustomVideoCaptureTextureData(mPreviewTextureId, mPreViewWidth, mPreViewHeight,
                     LiveApplication.Companion.getNeedCustomUpsideDown(), LiveApplication.Companion.getNeedCustomMirror(), SystemClock.elapsedRealtime());

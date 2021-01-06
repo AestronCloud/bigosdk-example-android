@@ -1,8 +1,10 @@
 package sg.bigo.common
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,11 +44,21 @@ class SixSeatVideoActivity : BaseActivity() {
     }
 
     private val mUserName by lazy {
-        intent.getStringExtra(KEY_USER_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("userName")
+        } else {
+            intent.getStringExtra(KEY_USER_NAME)
+        }
     }
 
     private val mChannelName: String by lazy {
-        intent.getStringExtra(KEY_CHANNEL_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("channelName")
+        } else {
+            intent.getStringExtra(KEY_CHANNEL_NAME)
+        }
     }
 
     val mics = arrayListOf(MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo(), MicInfo())
@@ -206,7 +218,12 @@ class SixSeatVideoActivity : BaseActivity() {
         if(isRestart) {
             leaveRoom()
         }
-        mRole = intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+        mRole = if (Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("role").toInt()
+        } else {
+            intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_AUDIENCE)
+        }
         mIAVEngine.addCallback(mVoiceLiveCallback)
     }
 

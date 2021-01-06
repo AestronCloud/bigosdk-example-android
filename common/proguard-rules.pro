@@ -93,3 +93,12 @@
     <fields>;
     <methods>;
 }
+
+
+-keep class com.polly.mobile.mediasdk.** {
+    *;
+}
+
+-keep class com.polly.mobile.videosdk.** {
+    *;
+}

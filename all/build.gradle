@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "sg.bigo.all"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -45,7 +45,7 @@ android {
 
     android.applicationVariants.all {variant ->
         variant.outputs.all {
-            outputFileName = "bigo-all-feature-${variant.buildType.name}.apk"
+            outputFileName = "aestron-all-feature-${variant.buildType.name}.apk"
         }
     }
 
@@ -59,7 +59,7 @@ android {
 dependencies {
     implementation project(':common-beauty')
     if(!isDebug()) {
-        runtimeOnly(name: 'bigo-advanced-beauty', ext: 'aar')
+        runtimeOnly(name: 'aestron-advanced-beauty', ext: 'aar')
     }
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

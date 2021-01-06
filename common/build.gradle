@@ -21,9 +21,10 @@ android {
         def port = (System.getenv("TOB_PORT") ?: "65537")
         def is_use_test_mode = (System.getenv("TOB_USE_TEST_MODE") ?: "false")
         def is_test_env = (System.getenv("TOB_IS_TEST_ENV") ?: "false")
+        def hide_custom_env = (System.getenv("TOB_HIDE_CUSTOM_ENV") ?: "false")
 
 
-        println("appid: ${appid} cert: ${cert} ip: ${ip} port ${port} is_test_env ${is_test_env} is_use_test_mode ${is_use_test_mode}")
+        println("appid: ${appid} cert: ${cert} ip: ${ip} port ${port} is_test_env ${is_test_env} is_use_test_mode ${is_use_test_mode} hide_custom_env ${hide_custom_env}")
 
         buildConfigField("String", "APPID", "\"" + appid + "\"")
         buildConfigField("String", "CERT", "\"" + cert + "\"")
@@ -31,6 +32,7 @@ android {
         buildConfigField("Integer", "PORT", String.valueOf(port))
         buildConfigField("Boolean","IS_TEST_ENV",String.valueOf(is_test_env))
         buildConfigField("Boolean","USE_TEST_MODE",String.valueOf(is_use_test_mode))
+        buildConfigField("Boolean","HIDE_CUSTOM_ENV",String.valueOf(hide_custom_env))
     }
 
     repositories {
@@ -81,7 +83,29 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    compileOnly(name: 'bigo-advanced-beauty', ext: 'aar')
+    if (isDebug()) {
+        implementation 'sg.bigo:openssl:20'
+        implementation project(':libcommon')
+        implementation project(':librtmnetwork')
+        implementation project(':opensdklib')
+        implementation project(':libReport')
+
+        if (isChannelNativeEncrypt()) {
+            implementation "sg.bigo.opensdk.rtm:librtmexchangekey:${project.EXCHANGEKEY_VERSION}"
+        } else {
+            implementation project(':libjava_exchangekey')
+        }
+
+        if (gradle.ext.MEDIA_SDK_DEBUG == true) {
+            implementation project(':MediaSDK')
+        } else {
+            implementation "sg.bigo.media.polly:MediaSDK:1.0.47.10007"
+        }
+    } else {
+//        api fileTree(dir: "libs", include: ["*.aar"])
+        compileOnly(name: 'aestron-advanced-beauty', ext: 'aar')
+    }
+
     implementation 'com.google.code.gson:gson:2.2.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.0'

@@ -5,9 +5,29 @@
     <!-- Get your own App ID at bigo web -->
     <!-- After you entered the App ID, remove <##> outside of Your App ID -->
     <!-- For formal released project, please use Security Keys/Token-->
+<!--    <string name="bigo_app_id">iexmyzwl0sjftq47vzspxtluf2im4nzc</string>-->
+<!--    <string name="bigo_app_id">m4jxlvauzpen4rteq9p45g641kbhh3nt</string>-->
+<!--        <string name="bigo_app_id">36ogfksyoqp2w0erzkdapf6x8nn6hdcj3</string>-->
     <!-- Please leave it if not enable App Certificate -->
     <!-- You can generate a temporary token at bigo web -->
     <string name="bigo_access_token">""</string>
+
+<!--    <string name="bigo_cert">lsr9qjnypyn0j9q99palo1z8sxci9qblosk4hd8ci13r1z6g</string>-->
+<!--    <string name="bigo_cert">0rms108hddwlxs9gj2qiskq41cn5zqhp7unyk1l457f86vff</string>-->
+<!--    <string name="bigo_cert">unkdacu48sk0m0k0s1gryrlz62mz2zsl4sps2gp0a917nmouo</string>-->
+
+<!--    <string name="bigo_app_id">36ogfksyoqp2w0erzkdapf6x8nn6hdcj3</string>-->
+
+<!--    <string name="bigo_app_id">m4jxlvauzpen4rteq9p45g641kbhh3nt</string>-->
+<!--    <string name="bigo_cert">0rms108hddwlxs9gj2qiskq41cn5zqhp7unyk1l457f86vff</string>-->
+
+<!--    <string name="bigo_app_id">5zaq309y5lzv4r3elxbufz6t6yzia0i5</string>-->
+<!--    <string name="bigo_cert">0015zaq309y5lzv4r3elxbufz6t6yzia0i5ABSmmr9fn2fKvDxlY5j48m8Dtm8u3PkBexOiiRrwTWnhV1</string>-->
+
+<!--    <string name="bigo_app_id">6f08222zln1c8sf41weg9hcn0sx1qvp2</string>-->
+<!--    <string name="bigo_cert">6th1ukmrtaldepimojgfs3roqwr648f0727sd09w01zkwndr</string>-->
+
+
     <string name="bigo_app_id"></string>
     <string name="bigo_cert"></string>
 </resources>

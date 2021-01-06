@@ -42,7 +42,7 @@ android {
 
     android.applicationVariants.all {variant ->
         variant.outputs.all {
-            outputFileName = "bigo-basic-beauty-1v1-${variant.buildType.name}.apk"
+            outputFileName = "aestron-basic-beauty-1v1-${variant.buildType.name}.apk"
         }
     }
 
@@ -56,7 +56,7 @@ android {
 dependencies {
     implementation project(':common-beauty')
     if(!isDebug()) {
-        runtimeOnly(name: 'bigo-video', ext: 'aar')
+        runtimeOnly(name: 'aestron-video', ext: 'aar')
     }
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

@@ -1,6 +1,7 @@
 package sg.bigo.common
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -27,11 +28,21 @@ private const val TAG = "One2OneLiveActivity"
 
 open class One2OneLiveActivity : BaseActivity() {
     private val mUserName by lazy {
-        intent.getStringExtra(KEY_USER_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("userName")
+        } else {
+            intent.getStringExtra(KEY_USER_NAME)
+        }
     }
 
     private val mChannelName: String by lazy {
-        intent.getStringExtra(KEY_CHANNEL_NAME)
+        if(Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("channelName")
+        } else {
+            intent.getStringExtra(KEY_CHANNEL_NAME)
+        }
     }
 
     val micUserMap = mutableMapOf<Long,ChannelMicUser?>()
@@ -117,7 +128,13 @@ open class One2OneLiveActivity : BaseActivity() {
         }
         mAVEngine.addCallback(mLiveCallback)
         mAVEngine.setChannelProfile(AVEngineConstant.ChannelProfile.COMMUNICATION)
-        mRole = intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_BROADCAST)
+        mRole = if (Intent.ACTION_VIEW.equals(intent.action)) {
+            val uri: Uri = intent.data
+            uri.getQueryParameter("role").toInt()
+        } else {
+            intent.getIntExtra(KEY_CLIENT_ROLE, AVEngineConstant.ClientRole.ROLE_BROADCAST)
+        }
+
     }
 
     open fun initView() {

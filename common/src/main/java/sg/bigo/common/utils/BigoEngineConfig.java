@@ -66,6 +66,7 @@ public class BigoEngineConfig {
     public static final String key_debug_cfg_appid = "key_debug_cfg_appid";
     public static final String key_debug_cfg_cert = "key_debug_cfg_cert";
     public static final String key_debug_cfg_env_enabled = "key_debug_cfg_env_enabled";
+    public static final String key_debug_cfg_appid_cert_enabled = "key_debug_cfg_appid_cert_enabled";
     public static final String key_debug_cfg_is_test_env = "key_debug_cfg_is_test_env";
     public static final String key_debug_cfg_custom_temp_token = "key_debug_cfg_custom_temp_token";
     public static final String key_debug_enable_temp_token = "key_debug_enable_temp_token";
@@ -76,6 +77,9 @@ public class BigoEngineConfig {
     public static final String key_debug_cfg_enable_mirror = "key_debug_cfg_enable_mirror";
     public static final String key_debug_cfg_enable_updown = "key_debug_cfg_enable_updown";
     public static final String key_debug_cfg_auto_publish_and_livetrancoding = "key_debug_cfg_auto_publish_and_livetrancoding";
+    public static final String key_debug_cfg_user_account = "key_debug_cfg_user_account";
+    public static final String key_debug_cfg_channel_name = "key_debug_cfg_channel_name";
+    public static final String key_debug_cfg_channel_cc = "key_debug_cfg_channel_cc";
 
     private SharedPreferences Pref() {
         return PreferenceManager.getDefaultSharedPreferences(LiveApplication.Companion.getAppContext());
@@ -115,6 +119,22 @@ public class BigoEngineConfig {
         return Long.valueOf(Pref().getString(key_debug_cfg_custom_uid,"123456789"));
     }
 
+    public String getUserAccount() {
+        return Pref().getString(key_debug_cfg_user_account,"张三_" + generateRandomNumber(5));
+    }
+
+    public void setUserAccount(String userAccount) {
+        Pref().edit().putString(key_debug_cfg_user_account,userAccount).apply();
+    }
+
+    public String getChannelName() {
+        return Pref().getString(key_debug_cfg_channel_name,"频道名_" + generateRandomNumber(5));
+    }
+
+    public void setChannelName(String channelName) {
+        Pref().edit().putString(key_debug_cfg_channel_name,channelName).apply();
+    }
+
     public String getLiveExtraInfo() {
         return Pref().getString(key_debug_cfg_extra_live_info,"");
     }
@@ -125,7 +145,6 @@ public class BigoEngineConfig {
     }
 
     public int getLbsPort() {
-        //填写自己默认ip
         return Integer.valueOf(Pref().getString(key_debug_cfg_lbs_port,"65537"));
     }
 
@@ -136,6 +155,10 @@ public class BigoEngineConfig {
 
     public boolean isCustomEnvEnabled() {
         return Pref().getBoolean(key_debug_cfg_env_enabled,false);
+    }
+
+    public boolean isEnableCustomAppidCert() {
+        return Pref().getBoolean(key_debug_cfg_appid_cert_enabled,false);
     }
     //===========================================================================
 
@@ -160,22 +183,18 @@ public class BigoEngineConfig {
 
     public String getAppId() {
         String appId = LiveApplication.Companion.getAppContext().getString(R.string.bigo_app_id);
-        return Pref().getString(key_debug_cfg_appid, appId);
-//        if (isCustomEnvEnabled()) {
-//
-//        } else {
-//            return appId;
-//        }
+        if (isEnableCustomAppidCert()) {
+            appId = Pref().getString(key_debug_cfg_appid,appId);
+        }
+        return appId;
     }
 
     public String getCert() {
         String cert = LiveApplication.Companion.getAppContext().getString(R.string.bigo_cert);
-        return Pref().getString(key_debug_cfg_cert,cert);
-//        if(isCustomEnvEnabled()) {
-//
-//        } else {
-//            return cert;
-//        }
+        if(isEnableCustomAppidCert()) {
+            cert = Pref().getString(key_debug_cfg_cert,cert);
+        }
+        return cert;
     }
 
     public int getProfile() {
@@ -210,16 +229,9 @@ public class BigoEngineConfig {
         mFpsIndex = fpsIndex;
     }
 
-    public String getChannelName() {
-        return mChannelName;
-    }
 
     public int getBitrate() {
         return mBitrate;
-    }
-
-    public void setChannelName(String mChannel) {
-        this.mChannelName = mChannel;
     }
 
     public boolean ifShowVideoStats() {
@@ -248,6 +260,10 @@ public class BigoEngineConfig {
 
     public int getMirrorEncodeIndex() {
         return mMirrorEncodeIndex;
+    }
+
+    public String getChannelCC() {
+        return Pref().getString(key_debug_cfg_channel_cc,"CN");
     }
 
     public void setMirrorEncodeIndex(int index) {

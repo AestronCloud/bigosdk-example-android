@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "sg.bigo.one2onecall"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -44,7 +44,7 @@ android {
 
     android.applicationVariants.all {variant ->
         variant.outputs.all {
-            outputFileName = "bigo-one-to-one-voice-${variant.buildType.name}.apk"
+            outputFileName = "aestron-one-to-one-voice-${variant.buildType.name}.apk"
         }
     }
 
@@ -58,7 +58,7 @@ android {
 dependencies {
     implementation project(':common')
     if(!isDebug()) {
-        runtimeOnly(name: 'bigo-audio', ext: 'aar')
+        runtimeOnly(name: 'aestron-audio', ext: 'aar')
     }
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.0'

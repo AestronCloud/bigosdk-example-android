@@ -37,19 +37,16 @@ class LiveApplication : Application() {
 
         fun avEngine(): IAVEngine {
             if(sInstance == null) {
-                sInstance = IAVEngine.create(appContext, appId, null, object : IAVEngineCallback() {}, object : TestEnv {
+                sInstance = IAVEngine.create(appContext, appId, null, object : IAVEngineCallback() {}, object : TestEnv{
                     override fun isTestMode(): Boolean {
                         return config.isCustomEnvEnabled
                     }
-
-                    override fun isTestEnv(): Boolean {
-                        return config.isTestEnv
-                    }
-
                     override fun getTestLbsIp(): String {
                         return config.lbsIp
                     }
-
+                    override fun isTestEnv(): Boolean {
+                        return config.isTestEnv
+                    }
                     override fun getTestLbsPort(): Int {
                         return config.lbsPort
                     }

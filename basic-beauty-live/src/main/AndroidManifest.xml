@@ -3,6 +3,7 @@
 
     <application
         android:name="sg.bigo.common.LiveApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/bigo_logo_small"
         android:label="@string/app_name"
@@ -12,7 +13,14 @@
 
         <activity android:name="sg.bigo.common.BasicBeautyLiveActivity"
             android:screenOrientation="portrait"
-            android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize"/>
+            android:configChanges="locale|touchscreen|keyboard|keyboardHidden|navigation|fontScale|uiMode|orientation|screenSize|smallestScreenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="aestron" android:host="tob" android:pathPrefix="/basicBeauty"/>
+            </intent-filter>
+        </activity>
         <activity android:name="sg.bigo.common.SettingsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="sg.bigo.common.LiveNameInputActivity"
@@ -21,6 +29,9 @@
             android:theme="@style/myTransparent"
             />
 
+        <activity android:name="sg.bigo.common.SoundChangeActivity"
+            android:theme="@style/myTransparent"
+            />
         <activity android:name="sg.bigo.common.DebugToolCfgActivity"
             android:screenOrientation="portrait"
             />
@@ -28,6 +39,23 @@
         <activity android:name="sg.bigo.common.SoundEffectSettingActivity"
             android:theme="@style/myTransparent"
             />
+
+        <activity android:name="sg.bigo.common.TranscodingCfgActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.TranscodingListEditActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.BigoImageEditActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="sg.bigo.common.TranscodingUserEditActivity"
+            android:screenOrientation="portrait"
+            />
+
         <activity android:name="sg.bigo.common.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">

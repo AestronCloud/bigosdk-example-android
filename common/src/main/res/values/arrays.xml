@@ -5,4 +5,34 @@
         <item>Enabled</item>
         <item>Disabled</item>
     </string-array>
+
+    <string-array name="sound_types">
+        <item>原效果</item>
+        <item>老男孩</item>
+        <item>小男孩</item>
+        <item>小女孩</item>
+        <item>猪八戒</item>
+        <item>空灵</item>
+        <item>绿巨人</item>
+        <item>怪兽</item>
+        <item>机器人</item>
+        <item>外星人</item>
+    </string-array>
+
+    <string-array name="reverberation_types">
+        <item>原效果</item>
+        <item>音乐会</item>
+        <item>录音棚</item>
+        <item>KTV</item>
+        <item>教堂</item>
+        <item>酒吧</item>
+        <item>浴室</item>
+    </string-array>
+
+    <string-array name="equalizer_types">
+        <item>原效果</item>
+        <item>舒适</item>
+        <item>低音</item>
+    </string-array>
+
 </resources>
