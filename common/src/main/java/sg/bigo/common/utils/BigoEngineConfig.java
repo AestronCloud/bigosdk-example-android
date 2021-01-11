@@ -92,23 +92,39 @@ public class BigoEngineConfig {
 //    public final boolean isEnableMultiView;
 
     public boolean isEnableMultiView() {
-        return Pref().getBoolean(key_debug_cfg_enable_multi_view,false);
+        try {
+            return Pref().getBoolean(key_debug_cfg_enable_multi_view,false);
+        } catch (Throwable e) {
+            return false;
+        }
     }
 
     public boolean isEnableCustomUid() {
-        return Pref().getBoolean(key_debug_cfg_enable_custom_uid,false);
+        try {
+            return Pref().getBoolean(key_debug_cfg_enable_custom_uid,false);
+        } catch (Throwable e) {
+            return false;
+        }
     }
 
     public boolean isEnableCustomCaptureMirror() {
-        return Pref().getBoolean(key_debug_cfg_enable_mirror,false);
+        try {
+            return Pref().getBoolean(key_debug_cfg_enable_mirror,false);
+        } catch (Throwable e) {
+            return false;
+        }
     }
 
     public int isEnableCustomCaptureUpsideDown() {
-        int rotation = 0;
-        if (Pref().getBoolean(key_debug_cfg_enable_updown, false)) {
-            rotation = 180;
+        try {
+            int rotation = 0;
+            if (Pref().getBoolean(key_debug_cfg_enable_updown, false)) {
+                rotation = 180;
+            }
+            return rotation;
+        } catch (Throwable e) {
+            return 0;
         }
-        return rotation;
     }
 
     public void genCustomUid() {
@@ -116,7 +132,11 @@ public class BigoEngineConfig {
     }
 
     public long getCustomUid() {
-        return Long.valueOf(Pref().getString(key_debug_cfg_custom_uid,"123456789"));
+        try {
+            return Long.valueOf(Pref().getString(key_debug_cfg_custom_uid,"123456789"));
+        } catch (Throwable e) {
+            return 123456789;
+        }
     }
 
     public String getUserAccount() {
@@ -141,11 +161,15 @@ public class BigoEngineConfig {
 
     //====================自定义环境相关==============================
     public String getLbsIp() {
-        return Pref().getString(key_debug_cfg_lbs_ip,"xxx.xxx.xxx.xxx");
+        return Pref().getString(key_debug_cfg_lbs_ip,"123.123.123.123");
     }
 
     public int getLbsPort() {
-        return Integer.valueOf(Pref().getString(key_debug_cfg_lbs_port,"65537"));
+        try {
+            return Integer.valueOf(Pref().getString(key_debug_cfg_lbs_port,"65537"));
+        } catch (Throwable e) {
+            return 65537;
+        }
     }
 
 

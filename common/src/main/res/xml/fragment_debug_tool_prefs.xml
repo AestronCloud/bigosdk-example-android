@@ -84,13 +84,13 @@
         android:key="@string/custom_env"
         android:title="@string/custom_env">
         <EditTextPreference
-            android:defaultValue="xxx.xxx.xxx.xxx"
+            android:defaultValue="123.123.123.123"
             android:dialogTitle="@string/debug_lbs_ip"
             android:key="key_debug_cfg_lbs_ip"
             android:title="@string/debug_lbs_ip"
             app:useSimpleSummaryProvider="true" />
         <EditTextPreference
-            android:defaultValue="xxxx"
+            android:defaultValue="1234"
             android:dialogTitle="@string/debug_lbs_port"
             android:key="key_debug_cfg_lbs_port"
             android:title="@string/debug_lbs_port"
