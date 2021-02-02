@@ -1,7 +1,7 @@
 #example-android
 
 ## 编译运行说明
-1. 将您的appId和cer到strings_config.xml
+1. 将您的appId和cert填入到strings_config.xml
 2. 根据需求选中不同的target,然后点击run运行即可
 > 不同的target可以编出不同的demo
 > 1. all：包含所有feature的demo
